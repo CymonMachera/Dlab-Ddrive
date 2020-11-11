@@ -14,8 +14,8 @@
     
 
     <!-- navigation -->
-    <div class="container-fluid bg-info">
-    <nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <div class="container-fluid navBrandTop">
+    <nav class="navbar navbar-expand-lg navbar-light  ">
         <a class="navbar-brand" href="#">
             <img src="{% static 'images/dLab_main logo.png' %}" width="80" height="30" alt="" loading="lazy">
           </a>
@@ -130,12 +130,24 @@
       <div class="row" data-widget="tab-slider">
         <div class="col-3 bgBodyTopRow">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">My Files</a>
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Shared</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Recent</a>
-            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Starred</a>
-            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Programs</a>
-            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Trash</a>
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"> 
+              <img src="{% static 'images/folderNormal.png' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">My Files</span> </a>
+            <a class="nav-link " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+              <img src="{% static 'images/share.png' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">Shared</span> </a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+              <img src="{% static 'images/recent.jpg' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">Recent</span> </a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+              <img src="{% static 'images/star.png' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">Starred</span> </a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+              <img src="{% static 'images/programs.png' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">Programs</span> </a>
+            <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+              <img src="{% static 'images/dustbin.png' %}" width="30" height="30" alt="" loading="lazy">
+              <span class="pl-2">Trash</span> </a>
           </div>
         </div>
         <div class="col-9">

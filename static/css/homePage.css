@@ -5,3 +5,7 @@
 .bgBodyTopRow2{
     background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%), #C4C4C4;
 }
+
+.navBrandTop{
+    background-color: #1C1190 !important;
+}

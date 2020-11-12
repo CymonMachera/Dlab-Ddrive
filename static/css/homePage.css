@@ -8,4 +8,49 @@
 
 .navBrandTop{
     background-color: #1C1190 !important;
+  
+}
+body{
+    height: 100%;
+    overflow: hidden;
+}
+.content{
+    /* overflow-y:auto; */
+     max-height: 700px; 
+    overflow-y: scroll;
+}
+.rowContent{
+    max-height: 300px;
+}
+
+.leftNav{
+    max-width: 100%;
+    min-height: 80px;
+    /* height: 100px; */
+    max-height: 400px;
+    /* overflow-y: scroll; */
+    overflow-x: hidden;
+
+}
+.afterLeftNav{
+    max-height: 700px;
+    background: rgba(196, 196, 196, 0.4);
+}
+.searchTop{
+    width: 400px !important;
+}
+
+.text-dlab{
+    font-size: 35px;
+   
+}
+
+.bg-top-form{
+    background-color:  #C4C4C4;
+   
+}
+
+#pillarDropDown{
+    border-radius: 50px; 
+
 }

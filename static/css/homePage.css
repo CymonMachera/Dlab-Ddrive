@@ -30,11 +30,16 @@ body{
     max-height: 400px;
     /* overflow-y: scroll; */
     overflow-x: hidden;
+    
+    background: rgba(196, 196, 196, 0.4);
 
 }
 .afterLeftNav{
     max-height: 700px;
     background: rgba(196, 196, 196, 0.4);
+    /* text-indent: 100%; */
+    color: rgba(196, 196, 196, 0.4);
+    
 }
 .searchTop{
     width: 400px !important;
@@ -53,4 +58,15 @@ body{
 #pillarDropDown{
     border-radius: 50px; 
 
+}
+
+.dropdownRightCorner{
+    background-color: red;
+    /* margin-right: 50px;
+    width: 100px;
+ */
+}
+
+.linkLeftNav{
+    color: #000000
 }

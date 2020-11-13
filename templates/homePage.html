@@ -16,8 +16,8 @@
     <!-- navigation -->
   
       
-      <div class="container-fluid navBrandTop ">
-      <nav class="navbar navbar-expand-lg navbar-light ">
+     
+      <nav class="navbar navbar-expand-lg navbar-light navBrandTop">
           <a class="navbar-brand " href="#">
               <img src="{% static 'images/dLab_main logo.png' %}" class="mx-4" width="90" height="40" alt="" loading="lazy">
             </a>
@@ -27,7 +27,7 @@
         
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item active ml-5 mr-5 ">
+              <li class="nav-item active ml-4 mr-5 ">
                 <a class="nav-link text-dlab" href="#"> <span class="text-white  ">  Dlab Drive</span><span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item mx-5 " >
@@ -53,56 +53,42 @@
 
             <!-- Ttems To the right corner  -->
             <ul class="navbar-nav">
-              <li class="nav-item mr-auto">
-                
-                 
-
-                  <div class="dropdown">
-                      <button class="btn " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a class="navbar-brand" href="#">
-                  <img src="{% static 'images/settings.png' %}" width="30" height="30" alt="" loading="lazy">
-                  </a>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                  </div>
-            
-          </li>
+             <li class="nav-item mr-right dropdown">
+        <a class="nav-link nav-brand " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <img src="{% static 'images/settings.png' %}" width="30" height="30" alt="" loading="lazy">
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
           <li class="nav-item ">
         
-            
                   <a class="navbar-brand" href="#">
                   <img src="{% static 'images/information.png' %}" width="30" height="30" alt="" loading="lazy">
                   </a>
             
           </li>
-          <li class="nav-item"> 
-              <a class="navbar-brand" href="#">
-                 
-                  <div class="dropdown ">
-                      <button class="btn" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a class="navbar-brand" href="#">
+         <li class="nav-item dropdown">
+         <a class="nav-link nav-brand " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                
                   <img src="{% static 'images/d.png' %}" width="30" height="30" alt="" loading="lazy">
                   </a>
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                      </div>
-                  </div>
-                 
-                  </a>
-            
-          </li>
+        <div class="dropdown-menu dropdown-menu-right dropdownRightCorner" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+
           </ul>
             
           </div>
         </nav>
-      </div>   
+       
         <!-- end navigation -->
 
 
@@ -154,31 +140,38 @@
   </div>
   
         <div class="row " data-widget="tab-slider">
-          <div class="col-3 bgBodyTopRow ">
-            <div class="nav flex-column nav-pills leftNav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <div class="col-3 bgBodyTopRow afterLeftNav mr-0 ">
+            <div class="nav flex-column nav-pills leftNav " id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"> 
                 <img src="{% static 'images/folderNormal.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">My Files</span> </a>
+                <span class="pl-2  linkLeftNav">My Files</span> </a>
               <a class="nav-link " id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                 <img src="{% static 'images/share.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">Shared</span> </a>
+                <span class="pl-2 linkLeftNav">Shared</span> </a>
               <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                 <img src="{% static 'images/recent.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">Recent</span> </a>
+                <span class="pl-2 linkLeftNav">Recent</span> </a>
               <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
                 <img src="{% static 'images/star.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">Starred</span> </a>
+                <span class="pl-2 linkLeftNav">Starred</span> </a>
               <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
                 <img src="{% static 'images/programs.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">Programs</span> </a>
+                <span class="pl-2 linkLeftNav">Programs</span> </a>
               <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
                 <img src="{% static 'images/dustbin.png' %}" width="30" height="30" alt="" loading="lazy">
-                <span class="pl-2">Trash</span> </a>
+                <span class="pl-2 linkLeftNav">Trash</span> </a>
                
             </div>
             <div class="afterLeftNav">
-           
+           <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+            <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+             <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+              <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+               <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+                <p>dfsfa  sjdfk kasdj jksdankjnnj jakd</p>
+                
 
+&nbsp;
             </div>
           </div>
           <div class="col-9  content">
@@ -190,47 +183,21 @@
               <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">Messages Panel</div>
               <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Settings Panel</div>
             </div>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p><p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p><p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
-            <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p><p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised
-
-            </p>
+            <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+             <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+               <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                 <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                   <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                     <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                       <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                         <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                          <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+             <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+               <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                 <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                   <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                     <img class="mx-2" src="{% static 'images/folder.png' %}" width="70" height="70" alt="" loading="lazy">
+                       
           </div>
         </div>
 

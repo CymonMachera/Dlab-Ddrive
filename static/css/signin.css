@@ -1,8 +1,28 @@
 
+body{
+  /* font-family: Roboto !important; */
+  background-color: rgba(255, 255, 255, 0.95)!important;
+}
+
+.bgLogin{
+  background-color: #C4C4C4 !important;
+}
+/* border-radius: 10px; */
 
 .loginForm{
   
-  background-color: #1C1190 !important;
+  background-color: #1C1190 ;
+  border-radius: 10px;
+  
   
 }
+.displayLogin{
+ 
+  /* font-style: normal; */
+/* font-weight: bold; */
+font-size: 25px;
+/* line-height: 42px; */
+
+}
+
 

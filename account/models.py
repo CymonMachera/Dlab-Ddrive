@@ -29,7 +29,7 @@ class Role(models.Model):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
-    roles = models.ManyToManyField(Role, choices = Role.ROLE_CHOICES,default = 1)
+    roles = models.ManyToManyField(Role, choices = Role.ROLE_CHOICES,default = 2)
     email = models.EmailField(max_length = 40, verbose_name = 'Email Address', unique = True)
     first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
     last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name')

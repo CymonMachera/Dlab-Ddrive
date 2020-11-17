@@ -6,30 +6,41 @@ from .managers import CustomUserManager
 
 
 #A model that creates the roles of the users
-class Role(models.Model):
-    '''
-    The Role entries are managed by the system,
-    automatically created via a Django data migration.
-    '''
+# class Role(models.Model):
+#     '''
+#     The Role entries are managed by the system,
+#     automatically created via a Django data migration.
+#     '''
 
+#     PILLAR_HEAD = 1
+#     NORMAL_USER = 2
+#     MANAGEMENT_USER = 3
+#     ROLE_CHOICES = (
+#         (PILLAR_HEAD, 'pillar_head'),
+#         (NORMAL_USER, 'normal-user'),
+#         (MANAGEMENT_USER, 'management_user'),
+        
+#     )
+
+#     id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
+
+#     def __str__(self):
+#         return self.get_id_display()
+
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     PILLAR_HEAD = 1
     NORMAL_USER = 2
     MANAGEMENT_USER = 3
+    ADMIN = 4
     ROLE_CHOICES = (
         (PILLAR_HEAD, 'pillar_head'),
         (NORMAL_USER, 'normal-user'),
         (MANAGEMENT_USER, 'management_user'),
+        (ADMIN, 'admin')
         
     )
 
-    id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
-
-    def __str__(self):
-        return self.get_id_display()
-
-class CustomUser(AbstractBaseUser, PermissionsMixin):
-
-    roles = models.ManyToManyField(Role, choices = Role.ROLE_CHOICES,default = 2)
+    roles = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=2)
     email = models.EmailField(max_length = 40, verbose_name = 'Email Address', unique = True)
     first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
     last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name')

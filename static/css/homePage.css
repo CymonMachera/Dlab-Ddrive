@@ -8,6 +8,7 @@
 
 .navBrandTop{
     background-color: #1C1190 !important;
+    height: 65px;
   
 }
 body{
@@ -60,13 +61,55 @@ body{
 
 }
 
-.dropdownRightCorner{
+/* .dropdownRightCorner{
     background-color: red;
-    /* margin-right: 50px;
+    margin-right: 50px;
     width: 100px;
- */
-}
+
+} */
 
 .linkLeftNav{
     color: #000000
 }
+
+.rightCornerButtons{
+    display: none;
+}
+
+
+@media only screen and (max-width: 994px) {
+    
+    .navBrandTop{
+        background-color: #1C1190 !important;
+        height: auto;
+      
+    }
+    .dlabDriveText{
+        display: none;
+    }
+
+  }
+
+  
+@media only screen and (max-width: 1262px) {
+    
+   
+    .dlabDriveText{
+        display: none;
+    }
+
+   
+  }
+
+  @media only screen and (max-width: 991px) {
+    
+   
+    
+
+    .rightCornerButtons{
+        display: inline;
+    }
+    .rightCornerButtonsNormal{
+        display: none;
+    }
+  }

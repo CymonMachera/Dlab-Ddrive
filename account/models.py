@@ -28,10 +28,10 @@ from .managers import CustomUserManager
 #         return self.get_id_display()
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    PILLAR_HEAD = 1
-    NORMAL_USER = 2
-    MANAGEMENT_USER = 3
-    ADMIN = 4
+    PILLAR_HEAD = 3
+    NORMAL_USER = 4
+    MANAGEMENT_USER = 2
+    ADMIN = 1
     ROLE_CHOICES = (
         (PILLAR_HEAD, 'pillar_head'),
         (NORMAL_USER, 'normal-user'),
@@ -81,3 +81,11 @@ class Profile(models.Model):
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
 
+class Pillar(models.Model):
+    name = models.CharField(max_length=50, blank = False, verbose_name = "Enter pillar Name")
+    pillar_desc = models.TextField(max_length=500, blank=True)
+    user_pillar = models.ManyToManyField(CustomUser, verbose_name = "Add Members", related_name = "pillar")
+    
+    def __str__(self):
+        return self.name
+    

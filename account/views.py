@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.shortcuts import redirect
 
 from .serializers import UserLoginSerializer
 
@@ -35,4 +36,17 @@ class UserLoginView(APIView):
                 }
             }
 
-            return Response(response, status=status_code)
+           
+            responsed = redirect('/home')
+            request.session.clear_expired()
+            responsed = redirect('/home')
+            request.session['user']=response['authenticatedUser']
+            request.session.set_expiry(0)
+            
+           
+
+            return responsed
+            
+
+            # return Response(response, status=status_code)
+       

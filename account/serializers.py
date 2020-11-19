@@ -6,7 +6,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import CustomUser
 
-import json
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
@@ -15,6 +14,7 @@ class UserLoginSerializer(serializers.Serializer):
     refresh = serializers.CharField(read_only=True)
     role = serializers.CharField(read_only=True)
     pillars = serializers.CharField(read_only=True)
+    name = serializers.CharField(read_only=True)
 
     def create(self, validated_date):
         pass
@@ -37,15 +37,17 @@ class UserLoginSerializer(serializers.Serializer):
 
             update_last_login(None, user)
 
-            #clean the pillar names from query to normal list
+            #clean the pillar names from queryset to normal list
             temp_pillar = list(user.pillar.all().values('name'))
             temp_pillar = [f['name'] for f in temp_pillar]
+
             validation = {
                 'access': access_token,
                 'refresh': refresh_token,
                 'email': user.email,
                 'role': user.roles,
                 'pillars':temp_pillar,
+                'name': user.get_full_name(),
                 
             }
 

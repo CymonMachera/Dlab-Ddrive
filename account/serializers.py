@@ -37,12 +37,15 @@ class UserLoginSerializer(serializers.Serializer):
 
             update_last_login(None, user)
 
+            #clean the pillar names from query to normal list
+            temp_pillar = list(user.pillar.all().values('name'))
+            temp_pillar = [f['name'] for f in temp_pillar]
             validation = {
                 'access': access_token,
                 'refresh': refresh_token,
                 'email': user.email,
                 'role': user.roles,
-                'pillars': user.pillar.all(),
+                'pillars':temp_pillar,
                 
             }
 

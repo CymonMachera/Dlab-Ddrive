@@ -5,9 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from account.models import CustomUser
-
-
+from account.models import CustomUser, Pillar
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -73,6 +71,8 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('email', 'password')}),
         ('Permissions', {'fields': ('is_admin',)}),
         ('Important dates', {'fields': ('last_login',)}),
+        # ('Pillar(s)', {'fields': ('user.pillar.all()',)}),
+        
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -88,3 +88,12 @@ class UserAdmin(BaseUserAdmin):
 
 # Now register the new UserAdmin...
 admin.site.register(CustomUser, UserAdmin)
+
+
+
+#Here begins the Pillar
+class PillarAdmin(admin.ModelAdmin):
+    filter_horizontal = ('user_pillar', )
+
+admin.site.register(Pillar, PillarAdmin)
+

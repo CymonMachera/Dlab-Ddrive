@@ -6,7 +6,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from .models import CustomUser
 
-import json
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()

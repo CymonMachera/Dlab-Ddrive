@@ -36,17 +36,5 @@ class UserLoginView(APIView):
                 }
             }
 
-           
-            responsed = redirect('/home')
-            request.session.clear_expired()
-            responsed = redirect('/home')
-            request.session['user']=response['authenticatedUser']
-            request.session.set_expiry(0)
-            
-           
-
-            return responsed
-            
-
-            # return Response(response, status=status_code)
+            return Response(response, status=status_code)
        

@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 # Create your models here.
 
 from .managers import CustomUserManager
+from dlab.models import Organization
 
 
 #A model that creates the roles of the users
@@ -72,6 +73,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         '''
         return self.first_name
+class Staff(models.Model):
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
+    first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
+    last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name') 
+
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)

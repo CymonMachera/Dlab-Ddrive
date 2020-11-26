@@ -33,10 +33,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     MANAGEMENT_USER = 2
     ADMIN = 1
     ROLE_CHOICES = (
-        (PILLAR_HEAD, 'pillar_head'),
-        (NORMAL_USER, 'normal-user'),
-        (MANAGEMENT_USER, 'management_user'),
-        (ADMIN, 'admin')
+        (PILLAR_HEAD, 'Pillar Head'),
+        (NORMAL_USER, 'Normal User'),
+        (MANAGEMENT_USER, 'Management user'),
+        (ADMIN, 'Admin')
         
     )
 
@@ -75,11 +75,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    Title = models.CharField(max_length=50, blank = False, verbose_name = "Title")
+    Telephone_number =  models.CharField(max_length=30, blank=True, verbose_name = 'Contacts')
+    birth_date = models.DateField(null=True, blank=False)
+    Address = models.CharField(max_length=30, blank=True)
+    biography = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.user.first_name
+
     
-    contacts =  models.CharField(max_length=30, blank=True, verbose_name = 'Contacts')
-    bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
-    birth_date = models.DateField(null=True, blank=True)
+    
 
 class Pillar(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Enter pillar Name")

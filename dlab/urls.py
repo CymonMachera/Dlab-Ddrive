@@ -23,3 +23,7 @@ urlpatterns = [
     path('home/', include('home.urls')),
     
 ]
+
+admin.site.site_header = 'DLAB DRIVE'
+admin.site.site_title = 'DLAB DRVIE Adminsitration' 
+admin.site.index_title = 'Site Administration'                 # default: "Site administration"

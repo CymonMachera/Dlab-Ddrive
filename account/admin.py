@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from account.models import CustomUser, Pillar
+from account.models import CustomUser, Pillar, Profile
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -52,8 +52,14 @@ class UserChangeForm(forms.ModelForm):
         # Regardless of what the user provides, return the initial value.
         # This is done here, rather than on the field, because the
         # field does not have access to the initial value
+ 
         return self.initial["password"]
-
+#crate the profile inline 
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    verbose_name_plural = 'Profile'
+    fk_name = 'user'
+    
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -71,7 +77,7 @@ class UserAdmin(BaseUserAdmin):
         (None, {'fields': ('email', 'password')}),
         ('Permissions', {'fields': ('is_admin',)}),
         ('Important dates', {'fields': ('last_login',)}),
-        # ('Pillar(s)', {'fields': ('user.pillar.all()',)}),
+        ('Role', {'fields': ('roles',)}),
         
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -79,12 +85,16 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name','roles', 'is_superuser', 'is_staff', 'is_active', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name','roles', 'is_superuser', 'is_active', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+    inlines = [
+        ProfileInline,
+
+    ]
 
 # Now register the new UserAdmin...
 admin.site.register(CustomUser, UserAdmin)

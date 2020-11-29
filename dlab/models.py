@@ -1,5 +1,5 @@
 from django.db import models
-from program.models import Activity
+from account.models import CustomUser
 
 class Organization(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Organization Name")
@@ -10,12 +10,29 @@ class Organization(models.Model):
 
     def __str__(self):
         return self.name
-class Collaborators(models.Model):
-    collaborator_name = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    Role =  models.CharField(max_length=50, blank = False, verbose_name = "Collaboration Role")
-    activity = models.ForeignKey(Activity, on_delete = models.CASCADE)
+
+class Staff(models.Model):
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True)
+    first_name =  models.CharField(max_length=30, blank=False, verbose_name = 'First Name')
+    last_name =  models.CharField(max_length=30, blank=False, verbose_name = 'Last Name') 
 
     def __str__(self):
-        name = str(self.collaborator_name)
-        role = self.Role
-        return name + "  ----->  " + role
+        '''
+        Returns the first_name plus the last_name, with a space in between.
+        '''
+        full_name = '%s %s' % (self.first_name, self.last_name)
+        return full_name.strip()
+
+
+
+class Profile(models.Model):
+    user_staff = models.OneToOneField(Staff, on_delete=models.CASCADE)
+    Title = models.CharField(max_length=50, blank = True, verbose_name = "Title")
+    Telephone_number =  models.CharField(max_length=30, blank=True, verbose_name = 'Contacts')
+    email = models.EmailField( max_length=254, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    Address = models.CharField(max_length=30, blank=True)
+    biography = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.Title  #check this part for concistance

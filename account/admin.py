@@ -5,7 +5,8 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from account.models import CustomUser, Pillar, Profile
+from account.models import CustomUser, Pillar
+from dlab.models import Profile
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -54,12 +55,7 @@ class UserChangeForm(forms.ModelForm):
         # field does not have access to the initial value
  
         return self.initial["password"]
-#crate the profile inline 
-class ProfileInline(admin.StackedInline):
-    model = Profile
-    verbose_name_plural = 'Profile'
-    fk_name = 'user'
-    
+   
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -91,10 +87,7 @@ class UserAdmin(BaseUserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
-    inlines = [
-        ProfileInline,
-
-    ]
+    
 
 # Now register the new UserAdmin...
 admin.site.register(CustomUser, UserAdmin)

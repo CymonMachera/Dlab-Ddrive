@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 # Create your models here.
 
 from .managers import CustomUserManager
-from dlab.models import Organization
+
 
 
 #A model that creates the roles of the users
@@ -41,7 +41,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         
     )
 
-    roles = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=2)
+    roles = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=True, default=4)
     email = models.EmailField(max_length = 40, verbose_name = 'Email Address', unique = True)
     first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
     last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name')
@@ -73,26 +73,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         '''
         return self.first_name
-class Staff(models.Model):
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE)
-    first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
-    last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name') 
-
-
-class Profile(models.Model):
-    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
-    Title = models.CharField(max_length=50, blank = False, verbose_name = "Title")
-    Telephone_number =  models.CharField(max_length=30, blank=True, verbose_name = 'Contacts')
-    birth_date = models.DateField(null=True, blank=False)
-    Address = models.CharField(max_length=30, blank=True)
-    biography = models.TextField(max_length=500, blank=True)
-
-    def __str__(self):
-        return self.user.first_name
-
+   
     
-    
-
 class Pillar(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Enter pillar Name")
     pillar_desc = models.TextField(max_length=500, blank=True)

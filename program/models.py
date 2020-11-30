@@ -53,23 +53,25 @@ class Collaborators(models.Model):
 
 class Coordinator(models.Model):
     name = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    # organization = models.ForeignKey(self.name.organization, on_delete=models.CASCADE)
     activity = models.ForeignKey(Activity, on_delete = models.CASCADE)
     def __str__(self):
-        return self.name
+        return str(self.name)
 
 class Facilitator(models.Model):
     name = models.ForeignKey(Staff, on_delete=models.CASCADE)
     activity = models.ForeignKey(Activity, on_delete = models.CASCADE)
     def __str__(self):
-        return self.name
+        return str(self.name) + str()
 
 
 #this model will use the model venue_details in addition to desplaying time 
 class Venue(models.Model):
     name = models.ForeignKey(Venue_detail, on_delete=models.CASCADE)
-    Start_time = models.TimeField(blank = False, editable=True)
-    End_time = models.TimeField(blank = False, editable=True)
     activity = models.ForeignKey(Activity, on_delete = models.CASCADE)
+    Start_time = models.DateTimeField(blank = False, editable=True)
+    End_time = models.DateTimeField(blank = False, editable=True)
+    
     def __str__(self):
         full_detail = '%s %s  %s' % (str(self.name), str(self.Start_time), str(self.End_time))
         return full_detail.strip()

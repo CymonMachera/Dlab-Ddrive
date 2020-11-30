@@ -12,9 +12,9 @@ class Organization(models.Model):
         return self.name
 
 class Staff(models.Model):
-    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True)
     first_name =  models.CharField(max_length=30, blank=False, verbose_name = 'First Name')
     last_name =  models.CharField(max_length=30, blank=False, verbose_name = 'Last Name') 
+    organization = models.ManyToManyField(Organization, verbose_name = "Organization", related_name = "staff")
 
     def __str__(self):
         '''

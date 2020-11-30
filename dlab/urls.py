@@ -24,6 +24,6 @@ urlpatterns = [
     
 ]
 
-admin.site.site_header = 'DLAB DRIVE'
-admin.site.site_title = 'DLAB DRVIE Adminsitration' 
+admin.site.site_header = 'dLab DRIVE'
+admin.site.site_title = 'dLab DRVIE Adminsitration' 
 admin.site.index_title = 'Site Administration'                 # default: "Site administration"

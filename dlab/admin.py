@@ -12,8 +12,8 @@ class StaffAdmin(admin.ModelAdmin):
     inlines = [
         ProfileInline,
     ]
+    filter_horizontal = ('organization', )
 
-admin.site.register(Collaborators)
 admin.site.register(Organization)
 admin.site.register(Staff, StaffAdmin)
 

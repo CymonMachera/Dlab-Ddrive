@@ -5,7 +5,7 @@ from program.models import *
 # Register your models here.
 
 #create an inline
-class CoordinatorInline(admin.StackedInline):
+class CoordinatorInline(admin.TabularInline):
     model = Coordinator
     extra = 1
 class FacilitatorInline(admin.StackedInline):

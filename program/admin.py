@@ -1,5 +1,6 @@
 from django.contrib import admin
 from program.models import *
+from documentation.models import Uploads
 
 
 # Register your models here.
@@ -26,6 +27,7 @@ class ActivityAdmin(admin.ModelAdmin):
         CoordinatorInline,
         FacilitatorInline,
         CollaboratorInline,
+        
         
     ]
 

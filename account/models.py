@@ -73,6 +73,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         Returns the short name for the user.
         '''
         return self.first_name
+    class Meta:
+        verbose_name_plural = "1 User Register"
    
     
 class Pillar(models.Model):
@@ -82,4 +84,7 @@ class Pillar(models.Model):
     
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = "2 Pillar Register"
     

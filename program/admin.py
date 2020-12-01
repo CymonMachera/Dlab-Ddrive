@@ -34,6 +34,7 @@ class ActivityAdmin(admin.ModelAdmin):
 admin.site.register(Program)
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Venue)
+admin.site.register(Venue_detail)
 
 #this method allows you to add a plus button without displaying the Model On Admin Panel
 class MyModelAdmin(admin.ModelAdmin):
@@ -42,4 +43,4 @@ class MyModelAdmin(admin.ModelAdmin):
         Return empty perms dict thus hiding the model from admin index.
         """
         return {}
-admin.site.register(Venue_detail, MyModelAdmin)
+admin.site.register(Location,MyModelAdmin)

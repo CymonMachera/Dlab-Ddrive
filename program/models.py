@@ -8,12 +8,21 @@ class Program(models.Model):
     program_desc = models.TextField(max_length=500, blank=True, verbose_name = "Program Description")
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name_plural = "Programs And Projects"
+
+class Location(models.Model):
+    location = models.CharField(max_length=50, blank = False)
+
 #this model will only store venue details
 class Venue_detail(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Venue Name")
-    location = models.CharField(max_length=50, blank = False)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Venues"
 
         
 
@@ -73,5 +82,8 @@ class Venue(models.Model):
     End_time = models.DateTimeField(blank = False, editable=True)
     
     def __str__(self):
-        full_detail = '%s %s  %s' % (str(self.name), str(self.Start_time), str(self.End_time))
+        full_detail = '%s %s  %s %s' % (str(self.name), str(self.Start_time), str(self.End_time), str(self.activity))
         return full_detail.strip()
+
+    class Meta:
+        verbose_name_plural = "Venue Usage"

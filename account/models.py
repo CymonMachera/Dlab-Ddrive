@@ -80,7 +80,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Pillar(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Enter pillar Name")
     pillar_desc = models.TextField(max_length=500, blank=True)
-    user_pillar = models.ManyToManyField(CustomUser, verbose_name = "Add Members", related_name = "pillar")
+    user_pillar = models.ManyToManyField(CustomUser, verbose_name = "Add Members", related_name = "pillar",)
     
     def __str__(self):
         return self.name

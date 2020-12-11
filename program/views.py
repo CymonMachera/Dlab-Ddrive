@@ -5,6 +5,22 @@ from .serializers import *
 from rest_framework.response import Response
 from program.models import Program, Activity
 
+   
+class PillarView(APIView):
+    serializer_class = PillarSerializer
+    permission_classes = [AllowAny]
+    def get(self, request):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_200_OK
+            #make a query to return list of pillars 
+            pillar = Pillar.objects.filter(Pillar__id = serializer.data['id'])
+            pillar = ActivitySerializer(pillar, many=True).data
+            response = pillar
+            return Response(response, status=status_code)
+
 class ProgramView(APIView):
     serializer_class = PillarSerializer
     permission_classes = [AllowAny]

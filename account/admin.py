@@ -47,7 +47,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password', 'first_name', 'last_name', 'is_active', 'is_admin')
+        fields = ('email', 'password', 'first_name', 'last_name', 'is_active', 'is_admin','is_superuser','is_staff')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -70,10 +70,10 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     """The fieldset displays on the user update page"""
     fieldsets = (
-        (None, {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_admin',)}),
-        ('Important dates', {'fields': ('last_login',)}),
+        (None, {'fields': ('email','first_name','last_name', 'password')}),
+        ('Permissions', {'fields': ('is_admin', 'is_active','is_superuser','is_staff')}),
         ('Role', {'fields': ('roles',)}),
+        ('Important dates', {'fields': ('last_login',)}),
         
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -100,3 +100,10 @@ class PillarAdmin(admin.ModelAdmin):
 
 admin.site.register(Pillar, PillarAdmin)
 
+
+
+
+# #Unregistering the auth token
+
+# from rest_framework.authtoken.models import Token
+# admin.site.unregister(Token)

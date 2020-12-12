@@ -28,9 +28,9 @@ class Venue_detail(models.Model):
 
 
 class Activity(models.Model):
-    Workshop = 3
-    Round_Table = 2
-    Training = 1
+    Workshop = 'Workshop'
+    Round_Table = 'Round Table'
+    Training = 'Training'
     ROLE_CHOICES = (
         (Workshop, 'Workshop'),
         (Round_Table, 'Round Table'),
@@ -41,7 +41,7 @@ class Activity(models.Model):
     
     name = models.CharField(max_length=50, blank = False, verbose_name = "Activity Name")
     activity_Program_type = models.ForeignKey(Program, on_delete = models.CASCADE, verbose_name = "Program/Project Name")
-    type_of_activity = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False)
+    type_of_activity = models.CharField(choices=ROLE_CHOICES, blank=True, null=False, max_length = 20)
     Participants_number = models.IntegerField(blank=False, verbose_name = "Number Of Participants")
     Start_time = models.DateField(blank = False, editable=True, verbose_name = "Start Date")
     End_time = models.DateField(blank = False, editable=True, verbose_name = "End Date")

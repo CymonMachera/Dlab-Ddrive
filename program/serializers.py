@@ -7,7 +7,7 @@ class PillarSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pillar  
-        fields = ['id',"name", 'pillar_desc']
+        fields = ["name", 'pillar_desc']
         read_only_fields = ['name','pillar_desc']
         
 class ProgramSerializer(serializers.ModelSerializer):

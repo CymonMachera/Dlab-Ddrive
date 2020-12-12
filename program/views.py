@@ -16,7 +16,7 @@ class PillarView(APIView):
         if valid:
             status_code = status.HTTP_200_OK
             #make a query to return list of pillars 
-            pillar = Pillar.objects.filter(Pillar__id = serializer.data['id'])
+            pillar = Pillar.objects.all()
             pillar = ActivitySerializer(pillar, many=True).data
             response = pillar
             return Response(response, status=status_code)

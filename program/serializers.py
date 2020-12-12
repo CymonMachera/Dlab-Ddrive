@@ -9,6 +9,12 @@ class PillarSerializer(serializers.ModelSerializer):
         model = Pillar  
         fields = ["name", 'pillar_desc']
         read_only_fields = ['name','pillar_desc']
+class PillarProgramSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Pillar  
+        fields = ["name", 'pillar_desc']
+        read_only_fields = ['pillar_desc']
         
 class ProgramSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()

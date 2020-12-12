@@ -22,9 +22,9 @@ class PillarView(APIView):
             return Response(response, status=status_code)
 
 class ProgramView(APIView):
-    serializer_class = PillarSerializer
+    serializer_class = PillarProgramSerializer
     permission_classes = [AllowAny]
-    def post(self, request):
+    def get(self, request):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 

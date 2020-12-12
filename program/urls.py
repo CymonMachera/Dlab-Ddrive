@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('program', ProgramView.as_view(), name='programs'),
-    path('activities', ActivityView.as_view(), name='activities'),
+    path('program/activity', ActivityView.as_view(), name='activities'),
     path('', PillarView.as_view(), name='pillar')
     
 ]

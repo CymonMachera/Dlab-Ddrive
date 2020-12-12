@@ -24,7 +24,7 @@ class PillarView(APIView):
 class ProgramView(APIView):
     serializer_class = PillarProgramSerializer
     permission_classes = [AllowAny]
-    def get(self, request):
+    def post(self, request):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 
@@ -40,7 +40,7 @@ class ProgramView(APIView):
 class ActivityView(APIView):
     serializer_class = ProgramSerializer
     permission_classes = [AllowAny]
-    def get(self, request):
+    def post(self, request):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 

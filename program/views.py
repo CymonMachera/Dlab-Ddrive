@@ -5,7 +5,7 @@ from .serializers import *
 from rest_framework.response import Response
 from program.models import Program, Activity
 
-   
+ # this view takes in the   
 class PillarView(APIView):
     serializer_class = PillarSerializer
     permission_classes = [AllowAny]

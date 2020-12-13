@@ -9,7 +9,7 @@ class Program(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "Programs And Projects"
+        verbose_name_plural = "Programs & Projects"
 
 class Location(models.Model):
     location = models.CharField(max_length=50, blank = False)
@@ -22,7 +22,7 @@ class Venue_detail(models.Model):
         return self.name
 
     class Meta:
-        verbose_name_plural = "Venues"
+        verbose_name_plural = "Venues List"
 
         
 
@@ -49,6 +49,8 @@ class Activity(models.Model):
     
     def __str__(self):
         return self.name
+    class Meta:
+        verbose_name_plural = "Activities"
 
 class Collaborators(models.Model):
     collaborator_name = models.ForeignKey(Staff, on_delete=models.CASCADE)

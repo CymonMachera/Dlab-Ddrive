@@ -29,6 +29,6 @@ urlpatterns = [
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
-admin.site.site_header = 'dLab DRIVE'
-admin.site.site_title = 'dLab DRVIE Adminsitration' 
-admin.site.index_title = 'Site Administration'                 # default: "Site administration"
+# admin.site.site_header = 'dLab DRIVE'
+# admin.site.site_title = 'dLab DRVIE Adminsitration' 
+# admin.site.index_title = 'Site Administration'                 # default: "Site administration"

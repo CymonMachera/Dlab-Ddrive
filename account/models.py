@@ -74,7 +74,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         '''
         return self.first_name
     class Meta:
-        verbose_name_plural = "1 User Register"
+        verbose_name_plural = "Users"
    
     
 class Pillar(models.Model):
@@ -86,5 +86,5 @@ class Pillar(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = "2 Pillar Register"
+        verbose_name_plural = "Pillars"
     

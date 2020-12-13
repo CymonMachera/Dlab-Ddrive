@@ -1,0 +1,53 @@
+{% extends "admin/base.html" %}
+
+
+{% block extrahead %}
+    <style>
+        #header {
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+    background: #1C1190;
+    color: #ffc;
+    overflow: hidden;
+    }
+    /* BREADCRUMBS */
+
+    div.breadcrumbs {
+    background: #4C63D6;
+    padding: 10px 40px;
+    border: none;
+    color: #c4dce8;
+    text-align: left;
+}
+
+
+    .module h2, .module caption, .inline-group h2{
+    background: #4C63D6;
+    color: #000;
+    height: 40px;
+    }
+    #branding h1{
+    color: #ffff;
+    }
+    </style>
+{% endblock %}
+
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <span ><a href="{% url 'admin:index' %}">
+        <img src="{% static 'images/dLab_main logo.png' %}" height="50px" />
+    </a>
+    </span>
+    <span class="text-white " style="border:3px; padding-left: 3em; font-size:140%;">  dLab Drive</span>
+ </h1>
+ {% endblock %}
+
+ {% block nav-global %}{% endblock %}

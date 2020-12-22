@@ -9,6 +9,7 @@ class ProfileInline(admin.StackedInline):
 
 
 class StaffAdmin(admin.ModelAdmin):
+    search_fields = ('first_name','last_name',)
     inlines = [
         ProfileInline,
     ]

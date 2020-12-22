@@ -22,7 +22,7 @@ urlpatterns = [
     path('token/obtain/', jwt_views.TokenObtainPairView.as_view(), name='token_create'),
     path('token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
     path('admin/', admin.site.urls),
-    path('documentation/', include('documentation.urls')),
+    path('pillar/program/activity/documentation/', include('documentation.urls')),
     path('login/', include('account.urls')),
     path('home/', include('home.urls')),
     path('pillar/', include('program.urls')),

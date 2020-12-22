@@ -14,6 +14,7 @@ class UserLoginSerializer(serializers.Serializer):
     refresh = serializers.CharField(read_only=True)
     role = serializers.CharField(read_only=True)
     pillars = serializers.CharField(read_only=True)
+    name = serializers.CharField(read_only=True)
 
     def create(self, validated_date):
         pass
@@ -45,6 +46,7 @@ class UserLoginSerializer(serializers.Serializer):
                 'email': user.email,
                 'role': user.roles,
                 'pillars':temp_pillar,
+                'name': user.get_full_name()
                 
             }
 

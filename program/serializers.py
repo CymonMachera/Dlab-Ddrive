@@ -26,7 +26,7 @@ class ProgramSerializer(serializers.ModelSerializer):
 
 
 class ActivitySerializer(serializers.ModelSerializer):
-    
+    id = serializers.IntegerField()
     class Meta:
         model = Activity
         fields = ['id',"name",'type_of_activity', 'Participants_number','Start_time','End_time','program_desc']

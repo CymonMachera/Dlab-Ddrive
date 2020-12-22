@@ -17,7 +17,7 @@ class Uploads(models.Model):
     uploader_name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     doc_type = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False)
     dete_uploaded = models.DateTimeField(auto_now_add=True)
-    upload_path = models.FileField(upload_to="pillar", verbose_name = "Choose File")
+    upload_path = models.FileField(upload_to="pillar/", verbose_name = "Choose File")
 
     def __str__(self):
         return str(self.doc_name)

@@ -16,6 +16,7 @@ from rest_framework_simplejwt import views as jwt_views
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from dlab.views import *
 from django.conf import settings
 from django.conf.urls.static import static
 urlpatterns = [
@@ -26,6 +27,9 @@ urlpatterns = [
     path('login/', include('account.urls')),
     path('home/', include('home.urls')),
     path('pillar/', include('program.urls')),
+    path('dlab/staff', StaffView.as_view(), name='staff'),
+    path('dlab/organization', OrganizationView.as_view(), name='organization'),
+    path('dlab/staff/profile', ProfileView.as_view(), name='profile'),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

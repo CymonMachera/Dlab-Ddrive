@@ -13,7 +13,8 @@ class Program(models.Model):
 
 class Location(models.Model):
     location = models.CharField(max_length=50, blank = False)
-    
+    # def __str__(self):
+    #     return self.location
 
 #this model will only store venue details
 class Venue_detail(models.Model):

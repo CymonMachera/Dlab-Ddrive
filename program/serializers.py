@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from account.models import Pillar
-from program.models import Program, Activity
+from program.models import *
 
 class PillarSerializer(serializers.ModelSerializer):
     
@@ -31,3 +31,20 @@ class ActivitySerializer(serializers.ModelSerializer):
         model = Activity
         fields = ['id',"name",'type_of_activity', 'Participants_number','Start_time','End_time','program_desc']
         read_only_fields = ["name",'type_of_activity', 'Participants_number','Start_time', 'End_time', 'program_desc']
+
+
+'''venues zone '''
+class VenueSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Venue
+        fields = "__all__"
+
+class VenueDetailSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Location
+        fields = "__all__"
+
+class LocationSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Venue_detail
+        fields = "__all__"

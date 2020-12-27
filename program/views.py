@@ -53,5 +53,47 @@ class ActivityView(APIView):
             return Response(response, status=status_code)
 
 
+class VenueView(APIView):
+    serializer_class = VenueSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+class VenueRegisterView(APIView):
+    serializer_class = VenueDetailSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
             
+            return Response(serializer.data, status=status_code)
+
+class LocationView(APIView):
+    serializer_class = LocationSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+
+
+
+
+
+
+
        

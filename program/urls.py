@@ -1,13 +1,33 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
 from program.views import *
 
 urlpatterns = [
-    path('program', ProgramView.as_view(), name='program'),
-    path('program/activity', ActivityView.as_view(), name='activities'),
     path('', PillarView.as_view(), name='pillar'),
-    path('venue', VenueView.as_view(), name='venue'),
-    path('venue/addVenue', VenueRegisterView.as_view(), name='register_venue'),
-    path('venue/addVenue/location', LocationView.as_view(), name='pillar')
+    path('<int:pk>/', PillarUpdateView.as_view(), name='pillar_update'),
+
+    path('<int:pk>/programs/', PillarProgramView.as_view(), name='pillar_program'),
+    path('<int:pk>/programs/addprogram/', ProgramView.as_view(), name='add_program'),
+    path('<int:pk>/programs/<int:pk_alt>/', ProgramUpdateView.as_view(), name='program_update'),
+
+    path('<int:pk>/programs/<int:pk_alt>/activities/', ProgramActivityView.as_view(), name='Program_activities'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/addactivity/', ActivityView.as_view(), name='add_activities'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/', ActivityUpdateView.as_view(), name='activities_update'),
+
+    path('venue/', VenueView.as_view(), name='venue'),
+    path('venue/<int:pk>/', VenueUpdateView.as_view(), name='venue_update'),
+
+    path('venue/addvenue/', VenueRegisterView.as_view(), name='register_venue'),
+    path('venue/addvenue/<int:pk>/', VenueRegisterUpdateView.as_view(), name='register_venue_update'),
+
+    path('venue/addvenue/location', LocationView.as_view(), name='location'),
+    path('venue/addvenue/location/<int:pk>/', LocationUpdateView.as_view(), name='location_update'),
+
+    #include url from documentations  
+    path('program/activity/documentation/', include('documentation.urls')),
+    
     
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns, suffix_required=False, allowed=['json', 'html'])

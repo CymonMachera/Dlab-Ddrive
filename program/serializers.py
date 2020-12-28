@@ -7,21 +7,14 @@ class PillarSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pillar  
-        fields = ["name", 'pillar_desc']
-        read_only_fields = ['name','pillar_desc']
-class PillarProgramSerializer(serializers.ModelSerializer):
-    
-    class Meta:
-        model = Pillar  
-        fields = ["name", 'pillar_desc']
-        read_only_fields = ['pillar_desc']
+        fields = "__all__"
+        
         
 class ProgramSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     class Meta:
         model = Program  
-        fields = ['id',"name", 'program_desc']
-        read_only_fields = ['name','program_desc']
+        fields = "__all__"
         
 
 
@@ -29,11 +22,10 @@ class ActivitySerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
     class Meta:
         model = Activity
-        fields = ['id',"name",'type_of_activity', 'Participants_number','Start_time','End_time','program_desc']
-        read_only_fields = ["name",'type_of_activity', 'Participants_number','Start_time', 'End_time', 'program_desc']
+        fields = "__all__"
 
 
-'''venues zone '''
+'''              venues zone           '''
 class VenueSerializer(serializers.ModelSerializer):
      class Meta:
         model = Venue
@@ -41,10 +33,10 @@ class VenueSerializer(serializers.ModelSerializer):
 
 class VenueDetailSerializer(serializers.ModelSerializer):
      class Meta:
-        model = Location
+        model = Venue_detail
         fields = "__all__"
 
 class LocationSerializer(serializers.ModelSerializer):
      class Meta:
-        model = Venue_detail
+        model = Location
         fields = "__all__"

@@ -40,3 +40,21 @@ class LocationSerializer(serializers.ModelSerializer):
      class Meta:
         model = Location
         fields = "__all__"
+
+class CoordinatorSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Coordinator
+        fields = "__all__"
+
+class CollaboratorsSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Collaborators
+        fields = "__all__"
+
+class FacilitatorSerializer(serializers.ModelSerializer):
+     class Meta:
+        model = Facilitator
+        fields = "__all__"
+
+
+

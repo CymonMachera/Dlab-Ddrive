@@ -293,7 +293,187 @@ class LocationUpdateView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+'''          Coordinator  Zone             '''
+class CoordinatorView(APIView):
+    serializer_class = CoordinatorSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+#Retrieve, update or delete a coordinator instance. 
+class CoordinatorUpdateView(APIView):
+    serializer_class = CoordinatorSerializer
+    permission_classes = [AllowAny]
+    def get_object(self, pk):
+        try:
+            return Coordinator.objects.get(pk=pk)
+        except Coordinator.DoesNotExist:
+            raise Http404
+
+    def put(self, request, *args, **kwargs):
+        coordinator_key = self.get_object(self.kwargs.get('coordinator_id', ''))
+        serializer = self.serializer_class(coordinator_key, data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+    def get(self, request, *args, **kwargs):
+        coordinator = self.get_object(self.kwargs.get('coordinator_id', ''))
+        serializer = CoordinatorSerializer(coordinator)
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        coordinator = self.get_object(self.kwargs.get('coordinator_id', ''))
+        coordinator.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
+'''          Collaborator  Zone             '''
+class CollaboratorsView(APIView):
+    serializer_class = CollaboratorsSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+    
+
+#Retrieve, update or delete a coordinator instance. 
+class CollaboratorsUpdateView(APIView):
+    serializer_class = CollaboratorsSerializer
+    permission_classes = [AllowAny]
+    def get_object(self, pk):
+        try:
+            return Collaborators.objects.get(pk=pk)
+        except Collaborators.DoesNotExist:
+            raise Http404
+
+    def put(self, request, *args, **kwargs):
+        coordinator_key = self.get_object(self.kwargs.get('collaborator_id', ''))
+        serializer = self.serializer_class(coordinator_key, data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+    def get(self, request, *args, **kwargs):
+        collaborator = self.get_object(self.kwargs.get('collaborator_id', ''))
+        serializer = CollaboratorsSerializer(collaborator)
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        collaborator = self.get_object(self.kwargs.get('collaborator_id', ''))
+        collaborator.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+'''          Facilitator  Zone             '''
+class FacilitatorView(APIView):
+    serializer_class = FacilitatorSerializer
+    permission_classes = [AllowAny]
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+    
+
+#Retrieve, update or delete a coordinator instance. 
+class FacilitatorUpdateView(APIView):
+    serializer_class = FacilitatorSerializer
+    permission_classes = [AllowAny]
+    def get_object(self, pk):
+        try:
+            return Facilitator.objects.get(pk=pk)
+        except Facilitator.DoesNotExist:
+            raise Http404
+
+    def put(self, request, *args, **kwargs):
+        facilitator_key = self.get_object(self.kwargs.get('facilitator_id', ''))
+        serializer = self.serializer_class(facilitator_key, data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+    def get(self, request, *args, **kwargs):
+        facilitator = self.get_object(self.kwargs.get('facilitator_id', ''))
+        serializer = FacilitatorSerializer(facilitator)
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        facilitator = self.get_object(self.kwargs.get('facilitator_id', ''))
+        facilitator.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
        
+###################################
+'''            ActivityCoordiantor Zone           '''
+class ActivityCoordinatorView(APIView):
+    serializer_class = ActivitySerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self, pk):
+        try:
+            return Coordinator.objects.filter( activity_id= pk)
+        except Coordinator.DoesNotExist:
+            raise Http404
+
+   
+    def get(self, request,*args, **kwargs):
+        coordinator = self.get_object(self.kwargs.get('activity_id', ''))
+        serializer = CoordinatorSerializer(coordinator, many=True)
+        return Response(serializer.data)
+
+'''            ActivityCollaborator Zone           '''
+class ActivityCollaboratorsView(APIView):
+    serializer_class = ActivitySerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self, pk):
+        try:
+            return Collaborators.objects.filter( activity_id= pk)
+        except Collaborators.DoesNotExist:
+            raise Http404
+
+   
+    def get(self, request,*args, **kwargs):
+        collaborator = self.get_object(self.kwargs.get('activity_id', ''))
+        serializer = CollaboratorsSerializer(collaborator, many=True)
+        return Response(serializer.data)
+
+'''            ActivityFacillitator Zone           '''
+class ActivityFacilitatorView(APIView):
+    serializer_class = FacilitatorSerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self, pk):
+        try:
+            return Facilitator.objects.filter( activity_id= pk)
+        except Facilitator.DoesNotExist:
+            raise Http404
+
+   
+    def get(self, request,*args, **kwargs):
+        facilitator = self.get_object(self.kwargs.get('activity_id', ''))
+        serializer = FacilitatorSerializer(facilitator, many=True)
+        return Response(serializer.data)

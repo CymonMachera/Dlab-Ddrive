@@ -28,11 +28,11 @@ urlpatterns = [
     path('pillar/', include('program.urls')),
 
     #from Dlab
-    path('dlab/staff', StaffView.as_view(), name='staff'),
+    path('dlab/staff/', StaffView.as_view(), name='staff'),
     path('dlab/staff/<int:pk>/', StaffUpdateView.as_view(), name='staff_update'),
-    path('dlab/organization', OrganizationView.as_view(), name='organization'),
+    path('dlab/organization/', OrganizationView.as_view(), name='organization'),
     path('dlab/organization/<int:pk>/', OrganizationUpdateView.as_view(), name='organization_update'),
-    path('dlab/staff/profile', ProfileView.as_view(), name='profile'),
+    path('dlab/staff/profile/', ProfileView.as_view(), name='profile'),
     path('dlab/staff/profile/<int:pk>/', ProfileUpdateView.as_view(), name='profile_update'),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

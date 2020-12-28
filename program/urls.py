@@ -15,6 +15,18 @@ urlpatterns = [
     path('<int:pk>/programs/<int:pk_alt>/activities/addactivity/', ActivityView.as_view(), name='add_activities'),
     path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/', ActivityUpdateView.as_view(), name='activities_update'),
 
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/coordinator/', ActivityCoordinatorView.as_view(), name='activities_coordinator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/coordinator/addcoordinator/', CoordinatorView.as_view(), name='add_coordinator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/coordinator/<int:coordinator_id>/', CoordinatorUpdateView.as_view(), name='add_coordinator'),
+
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/collaborator/', ActivityCollaboratorsView.as_view(), name='activities_collaborator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/collaborator/addcollaborator/', CollaboratorsView.as_view(), name='add_collaborator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/collaborator/<int:collaborator_id>/', CollaboratorsUpdateView.as_view(), name='add_collaborator'),
+
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/facilitator/', ActivityFacilitatorView.as_view(), name='activities_collaborator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/facilitator/addfacilitator/', FacilitatorView.as_view(), name='add_collaborator'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/facilitator/<int:facilitator_id>/', FacilitatorUpdateView.as_view(), name='add_collaborator'),
+
     path('venue/', VenueView.as_view(), name='venue'),
     path('venue/<int:pk>/', VenueUpdateView.as_view(), name='venue_update'),
 

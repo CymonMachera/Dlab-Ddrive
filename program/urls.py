@@ -27,12 +27,16 @@ urlpatterns = [
     path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/facilitator/addfacilitator/', FacilitatorView.as_view(), name='add_collaborator'),
     path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/facilitator/<int:facilitator_id>/', FacilitatorUpdateView.as_view(), name='add_collaborator'),
 
-    path('venue/', VenueView.as_view(), name='venue'),
-    path('venue/<int:pk>/', VenueUpdateView.as_view(), name='venue_update'),
+    #Venues urls
+    path('venue/', VenueView.as_view(), name='venues'),
+    path('venue/addvenue/', AddVenueView.as_view(), name='add_venue'),
+    path('venue/<int:pk>/', VenueRegisterUpdateView.as_view(), name='register_venue_update'),
 
-    path('venue/addvenue/', VenueRegisterView.as_view(), name='register_venue'),
-    path('venue/addvenue/<int:pk>/', VenueRegisterUpdateView.as_view(), name='register_venue_update'),
+    path('venue/<int:pk>/usage/', VenueUsageView.as_view(), name='venue_usage'),
+    path('venue/<int:pk>/addusage/', AddVenueUsageView.as_view(), name='venue_usage'),
+    path('venue/<int:pk>/', VenueUsageUpdateView.as_view(), name='venue_usage_update'),
 
+    
     path('venue/addvenue/location', LocationView.as_view(), name='location'),
     path('venue/addvenue/location/<int:pk>/', LocationUpdateView.as_view(), name='location_update'),
 

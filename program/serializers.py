@@ -3,15 +3,13 @@ from rest_framework import serializers
 from account.models import Pillar
 from program.models import *
 
-class PillarSerializer(serializers.ModelSerializer):
-    
+class PillarSerializer(serializers.ModelSerializer):   
     class Meta:
         model = Pillar  
         fields = "__all__"
         
         
 class ProgramSerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
     class Meta:
         model = Program  
         fields = "__all__"
@@ -19,7 +17,6 @@ class ProgramSerializer(serializers.ModelSerializer):
 
 
 class ActivitySerializer(serializers.ModelSerializer):
-    id = serializers.IntegerField()
     class Meta:
         model = Activity
         fields = "__all__"

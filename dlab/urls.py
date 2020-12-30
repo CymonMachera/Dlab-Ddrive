@@ -29,11 +29,16 @@ urlpatterns = [
 
     #from Dlab
     path('dlab/staff/', StaffView.as_view(), name='staff'),
-    path('dlab/staff/<int:pk>/', StaffUpdateView.as_view(), name='staff_update'),
+    path('dlab/staff/addstaff/', AddStaffView.as_view(), name='add_staff'),
+    path('dlab/staff/<int:staff_id>/', StaffUpdateView.as_view(), name='staff_update'),
+
     path('dlab/organization/', OrganizationView.as_view(), name='organization'),
+    path('dlab/organization/addorganization', AddOrganizationView.as_view(), name='add_organization'),
     path('dlab/organization/<int:pk>/', OrganizationUpdateView.as_view(), name='organization_update'),
-    path('dlab/staff/profile/', ProfileView.as_view(), name='profile'),
-    path('dlab/staff/profile/<int:pk>/', ProfileUpdateView.as_view(), name='profile_update'),
+
+    path('dlab/staff/<int:staff_id>/profile/', StaffProfileView.as_view(), name='profile'),
+    path('dlab/staff/<int:staff_id>/profile/addprofile/', ProfileView.as_view(), name='add_profile'),
+    path('dlab/staff/<int:staff_id>/profile/<int:profile_id>/', ProfileUpdateView.as_view(), name='profile_update'),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 

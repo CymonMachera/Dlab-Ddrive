@@ -155,7 +155,7 @@ class ActivityUpdateView(APIView):
 
 
 '''            New venue register          '''
-class VenueRegisterView(APIView):
+class AddVenueView(APIView):
     serializer_class = VenueDetailSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
@@ -165,6 +165,8 @@ class VenueRegisterView(APIView):
             status_code = status.HTTP_201_CREATED
             serializer.save()
             return Response(serializer.data, status=status_code)
+class VenueView(APIView):
+    permission_classes = [AllowAny]
     def get(self, request, format=None):
         venue = Venue_detail.objects.all()
         serializer = VenueDetailSerializer(venue, many=True)
@@ -200,7 +202,13 @@ class VenueRegisterUpdateView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 '''        Venue  usage Zone         '''
-class VenueView(APIView):
+class VenueUsageView(APIView):
+    def get(self, request, format=None):
+        venue = Venue.objects.all()
+        serializer = VenueSerializer(venue, many=True)
+        return Response(serializer.data)
+
+class AddVenueUsageView(APIView):
     serializer_class = VenueSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
@@ -210,12 +218,8 @@ class VenueView(APIView):
             status_code = status.HTTP_201_CREATED
             serializer.save()
             return Response(serializer.data, status=status_code)
-    def get(self, request, format=None):
-        venue = Venue.objects.all()
-        serializer = VenueSerializer(venue, many=True)
-        return Response(serializer.data)
 #Retrieve, update or delete a venue usage instance. 
-class VenueUpdateView(APIView):
+class VenueUsageUpdateView(APIView):
     serializer_class = VenueSerializer
     permission_classes = [AllowAny]
     def get_object(self, pk):

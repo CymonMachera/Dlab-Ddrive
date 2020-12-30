@@ -10,6 +10,13 @@ from django.http import Http404
 '''                       Organizaion  Zone                '''
 #view to create and update organization
 class OrganizationView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, format=None):
+        organizations = Organization.objects.all()
+        serializer = OrganizationSerializer(organizations, many=True)
+        return Response(serializer.data)
+#view to create organization
+class AddOrganizationView(APIView):
     serializer_class = OrganizationSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
@@ -19,10 +26,6 @@ class OrganizationView(APIView):
             status_code = status.HTTP_201_CREATED
             serializer.save()
             return Response(serializer.data, status=status_code)
-    def get(self, request, format=None):
-        organizations = Organization.objects.all()
-        serializer = OrganizationSerializer(organizations, many=True)
-        return Response(serializer.data)
 
 #Retrieve, update or delete a organization instance. 
 class OrganizationUpdateView(APIView):
@@ -54,6 +57,13 @@ class OrganizationUpdateView(APIView):
 '''                       Staff Zone                '''
 # List all staffs or create a new one
 class StaffView(APIView):
+    permission_classes = [AllowAny]
+    def get(self, request, format=None):
+        staffs = Staff.objects.all()
+        serializer = StaffSerializer(staffs, many=True)
+        return Response(serializer.data)
+
+class AddStaffView(APIView):
     serializer_class = StaffSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
@@ -65,11 +75,6 @@ class StaffView(APIView):
             serializer.save()
             
             return Response(serializer.data, status=status_code)
-    def get(self, request, format=None):
-        staffs = Staff.objects.all()
-        serializer = StaffSerializer(staffs, many=True)
-        return Response(serializer.data)
-
 
 #Retrieve, update or delete a staff instance. 
 class StaffUpdateView(APIView):
@@ -81,8 +86,8 @@ class StaffUpdateView(APIView):
         except Staff.DoesNotExist:
             raise Http404
 
-    def put(self, request, pk, format=None):
-        staff_key = self.get_object(pk)
+    def put(self, request, *args, **kwargs):
+        staff_key = self.get_object(self.kwargs.get('staff_id', ''))
         serializer = self.serializer_class(staff_key, data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 
@@ -91,8 +96,8 @@ class StaffUpdateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status_code)
 
-    def get(self, request, pk, format=None):
-        staff = self.get_object(pk)
+    def get(self, request, *args, **kwargs):
+        staff = self.get_object(self.kwargs.get('staff_id', ''))
         serializer = StaffSerializer(staff)
         return Response(serializer.data)
 '''         Profile  zone                '''
@@ -109,10 +114,6 @@ class ProfileView(APIView):
             serializer.save()
             
             return Response(serializer.data, status=status_code)
-    def get(self, request, format=None):
-        profile = Profile.objects.all()
-        serializer = ProfileSerializer(profile, many=True)
-        return Response(serializer.data)
 
 #Retrieve, update or delete a profile instance. 
 class ProfileUpdateView(APIView):
@@ -124,8 +125,8 @@ class ProfileUpdateView(APIView):
         except Profile.DoesNotExist:
             raise Http404
 
-    def put(self, request, pk, format=None):
-        profile_key = self.get_object(pk)
+    def put(self, request, *args, **kwargs):
+        profile_key = self.get_object(self.kwargs.get('profile_id', ''))
         serializer = self.serializer_class(profile_key, data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 
@@ -134,8 +135,24 @@ class ProfileUpdateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status_code)
 
-    def get(self, request, pk, format=None):
-        profile = self.get_object(pk)
+    def get(self, request, *args, **kwargs):
+        profile = self.get_object(self.kwargs.get('profile_id', ''))
         serializer = ProfileSerializer(profile)
         return Response(serializer.data)
 
+'''            StaffProfile Zone           '''
+class StaffProfileView(APIView):
+    serializer_class = StaffSerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self, pk):
+        try:
+            return Profile.objects.filter( user_staff_id= pk)
+        except Profile.DoesNotExist:
+            raise Http404
+
+   
+    def get(self, request,*args, **kwargs):
+        profile = self.get_object(self.kwargs.get('staff_id', ''))
+        serializer = ProfileSerializer(profile, many=True)
+        return Response(serializer.data)

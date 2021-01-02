@@ -30,11 +30,11 @@ urlpatterns = [
     #Venues urls
     path('venue/', VenueView.as_view(), name='venues'),
     path('venue/addvenue/', AddVenueView.as_view(), name='add_venue'),
-    path('venue/<int:pk>/', VenueRegisterUpdateView.as_view(), name='register_venue_update'),
+    path('venue/<int:pk>/', VenueUpdateView.as_view(), name='register_venue_update'),
 
-    path('venue/<int:pk>/usage/', VenueUsageView.as_view(), name='venue_usage'),
-    path('venue/<int:pk>/addusage/', AddVenueUsageView.as_view(), name='venue_usage'),
-    path('venue/<int:pk>/', VenueUsageUpdateView.as_view(), name='venue_usage_update'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/venueusage/', ActivityVenueUsageView.as_view(), name='venue_usage'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/venueusage/addvenueusage/', AddVenueUsageView.as_view(), name='add_venue_usage'),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/venueusage/<int:venueusage_id>/', VenueUsageUpdateView.as_view(), name='venue_usage_update'),
 
     
     path('venue/addvenue/location', LocationView.as_view(), name='location'),

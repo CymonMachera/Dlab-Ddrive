@@ -156,7 +156,7 @@ class ActivityUpdateView(APIView):
 
 '''            New venue register          '''
 class AddVenueView(APIView):
-    serializer_class = VenueDetailSerializer
+    serializer_class = VenueSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -169,11 +169,11 @@ class VenueView(APIView):
     permission_classes = [AllowAny]
     def get(self, request, format=None):
         venue = Venue_detail.objects.all()
-        serializer = VenueDetailSerializer(venue, many=True)
+        serializer = VenueSerializer(venue, many=True)
         return Response(serializer.data)
 #Retrieve, update or delete a venue instance. 
-class VenueRegisterUpdateView(APIView):
-    serializer_class = VenueDetailSerializer
+class VenueUpdateView(APIView):
+    serializer_class = VenueSerializer
     permission_classes = [AllowAny]
     def get_object(self, pk):
         try:
@@ -193,7 +193,7 @@ class VenueRegisterUpdateView(APIView):
 
     def get(self, request, pk, format=None):
         venue_detail = self.get_object(pk)
-        serializer = VenueDetailSerializer(venue_detail)
+        serializer = VenueSerializer(venue_detail)
         return Response(serializer.data)
 
     def delete(self, request, pk, format=None):
@@ -203,13 +203,14 @@ class VenueRegisterUpdateView(APIView):
 
 '''        Venue  usage Zone         '''
 class VenueUsageView(APIView):
+    ''' currently not in use, later used to display all venue usages'''
     def get(self, request, format=None):
         venue = Venue.objects.all()
-        serializer = VenueSerializer(venue, many=True)
+        serializer = VenueUsageSerializer(venue, many=True)
         return Response(serializer.data)
 
 class AddVenueUsageView(APIView):
-    serializer_class = VenueSerializer
+    serializer_class = VenueUsageSerializer
     permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -220,7 +221,7 @@ class AddVenueUsageView(APIView):
             return Response(serializer.data, status=status_code)
 #Retrieve, update or delete a venue usage instance. 
 class VenueUsageUpdateView(APIView):
-    serializer_class = VenueSerializer
+    serializer_class = VenueUsageSerializer
     permission_classes = [AllowAny]
     def get_object(self, pk):
         try:
@@ -228,8 +229,8 @@ class VenueUsageUpdateView(APIView):
         except Venue.DoesNotExist:
             raise Http404
 
-    def put(self, request, pk, format=None):
-        Venue_key = self.get_object(pk)
+    def put(self, request, *args, **kwargs):
+        Venue_key = self.get_object(self.kwargs.get('venueusage_id', ''))
         serializer = self.serializer_class(Venue_key, data=request.data)
         valid = serializer.is_valid(raise_exception=True)
 
@@ -238,13 +239,13 @@ class VenueUsageUpdateView(APIView):
             serializer.save()
             return Response(serializer.data, status=status_code)
 
-    def get(self, request, pk, format=None):
-        venue = self.get_object(pk)
-        serializer = VenueSerializer(venue)
+    def get(self, request, *args, **kwargs):
+        venue = self.get_object(self.kwargs.get('venueusage_id', ''))
+        serializer = VenueUsageSerializer(venue)
         return Response(serializer.data)
 
-    def delete(self, request, pk, format=None):
-        venue = self.get_object(pk)
+    def delete(self, request, *args, **kwargs):
+        venue = self.get_object(self.kwargs.get('venueusage_id', ''))
         venue.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -467,7 +468,7 @@ class ActivityCollaboratorsView(APIView):
 
 '''            ActivityFacillitator Zone           '''
 class ActivityFacilitatorView(APIView):
-    serializer_class = FacilitatorSerializer
+    serializer_class = ActivitySerializer
     permission_classes = [AllowAny]
 
     def get_object(self, pk):
@@ -480,4 +481,21 @@ class ActivityFacilitatorView(APIView):
     def get(self, request,*args, **kwargs):
         facilitator = self.get_object(self.kwargs.get('activity_id', ''))
         serializer = FacilitatorSerializer(facilitator, many=True)
+        return Response(serializer.data)
+
+'''            ActivityVenueUSage Zone           '''
+class ActivityVenueUsageView(APIView):
+    serializer_class = ActivitySerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self, pk):
+        try:
+            return Venue.objects.filter( activity_id= pk)
+        except Venue.DoesNotExist:
+            raise Http404
+
+   
+    def get(self, request,*args, **kwargs):
+        venuusage = self.get_object(self.kwargs.get('activity_id', ''))
+        serializer = VenueUsageSerializer(venuusage, many=True)
         return Response(serializer.data)

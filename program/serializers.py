@@ -23,12 +23,12 @@ class ActivitySerializer(serializers.ModelSerializer):
 
 
 '''              venues zone           '''
-class VenueSerializer(serializers.ModelSerializer):
+class VenueUsageSerializer(serializers.ModelSerializer):
      class Meta:
         model = Venue
         fields = "__all__"
 
-class VenueDetailSerializer(serializers.ModelSerializer):
+class VenueSerializer(serializers.ModelSerializer):
      class Meta:
         model = Venue_detail
         fields = "__all__"

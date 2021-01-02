@@ -55,7 +55,8 @@ class Activity(models.Model):
         verbose_name_plural = "Activities"
 
 class Collaborators(models.Model):
-    collaborator_name = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    collaborator_name = models.ForeignKey(Staff, on_delete=models.CASCADE, null =True, blank = True)
+    collaborator_name_organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True, blank = True)
     Role =  models.CharField(max_length=50, blank = False, verbose_name = "Collaboration Role")
     activity = models.ForeignKey(Activity, on_delete = models.CASCADE)
 

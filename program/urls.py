@@ -41,7 +41,7 @@ urlpatterns = [
     path('venue/location/<int:pk>/', LocationUpdateView.as_view(), name='location_update'),
 
     #include url from documentations  
-    path('program/activity/documentation/', include('documentation.urls')),
+    path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/files/', include('documentation.urls')),
     
     
 ]

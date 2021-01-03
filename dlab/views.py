@@ -12,7 +12,7 @@ from django.http import Http404
 class OrganizationView(APIView):
     permission_classes = [AllowAny]
     def get(self, request, format=None):
-        organizations = Organization.objects.all()
+        organizations = Organization.objects.all().order_by("name")
         serializer = OrganizationSerializer(organizations, many=True)
         return Response(serializer.data)
 #view to create organization

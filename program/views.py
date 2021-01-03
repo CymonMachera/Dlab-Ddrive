@@ -38,7 +38,7 @@ class PillarProgramView(APIView):
 
     def get_object(self, pk):
         try:
-            return Program.objects.filter(Pillar__id = pk)
+            return Program.objects.filter(Pillar__id = pk).order_by('-date_modified')
         except Program.DoesNotExist:
             raise Http404
 

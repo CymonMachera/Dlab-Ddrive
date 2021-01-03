@@ -7,6 +7,7 @@ from program.models import Activity
 #a model to create the folder
 class Folder(models.Model):
     creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE, blank = True, null=True)
     name = models.CharField(max_length=64)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,12 +50,11 @@ class Uploads(models.Model):
         (Documents, 'Documents')
         
     )
-    activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE)
+    activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE, blank = True, null=True)
     doc_type = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, blank=True, null=False)
     doc_name = models.CharField(max_length=50)
     uploader_name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    folder = models.ForeignKey(Folder, on_delete=models.CASCADE)
-    
+    folder = models.ForeignKey(Folder, on_delete=models.CASCADE, blank = True, null=True)
     dete_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
     #prepare the url

@@ -6,10 +6,13 @@ class Program(models.Model):
     name = models.CharField(max_length=50, blank = False, verbose_name = "Program or Project Name")
     Pillar = models.ForeignKey(Pillar, on_delete = models.CASCADE)
     program_desc = models.TextField(max_length=500, blank=True, verbose_name = "Program Description")
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
     class Meta:
         verbose_name_plural = "Programs & Projects"
+        ordering = ("-date_modified",)
 
 class Location(models.Model):
     location = models.CharField(max_length=50, blank = False)
@@ -48,11 +51,14 @@ class Activity(models.Model):
     Start_time = models.DateField(blank = False, editable=True, verbose_name = "Start Date")
     End_time = models.DateField(blank = False, editable=True, verbose_name = "End Date")
     program_desc = models.TextField(max_length=500, blank=True, verbose_name = "Activity Description")
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_modified = models.DateTimeField(auto_now=True)
     
     def __str__(self):
         return self.name
     class Meta:
         verbose_name_plural = "Activities"
+        ordering = ("-date_modified",)
 
 class Collaborators(models.Model):
     collaborator_name = models.ForeignKey(Staff, on_delete=models.CASCADE, null =True, blank = True)

@@ -37,8 +37,8 @@ urlpatterns = [
     path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/venueusage/<int:venueusage_id>/', VenueUsageUpdateView.as_view(), name='venue_usage_update'),
 
     
-    path('venue/addvenue/location', LocationView.as_view(), name='location'),
-    path('venue/addvenue/location/<int:pk>/', LocationUpdateView.as_view(), name='location_update'),
+    path('venue/location', LocationView.as_view(), name='location'),
+    path('venue/location/<int:pk>/', LocationUpdateView.as_view(), name='location_update'),
 
     #include url from documentations  
     path('program/activity/documentation/', include('documentation.urls')),

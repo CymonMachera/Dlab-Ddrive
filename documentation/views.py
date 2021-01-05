@@ -52,6 +52,36 @@ class FolderUpdateView(APIView):
         folder.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+#Retrieve, update or delete a folder instance. 
+class FolderLevel2UpdateView(APIView):
+    serializer_class = FolderSerializer
+    permission_classes = [AllowAny]
+    def get_object(self, pk):
+        try:
+            return Folder.objects.get(pk=pk)
+        except Folder.DoesNotExist:
+            raise Http404
+
+    def put(self, request, *args, **kwargs):
+        folder_key = self.get_object(self.kwargs.get('folder_level2_id', ''))
+        serializer = self.serializer_class(folder_key, data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+
+        if valid:
+            status_code = status.HTTP_201_CREATED
+            serializer.save()
+            return Response(serializer.data, status=status_code)
+
+    def get(self, request, *args, **kwargs):
+        folder = self.get_object(self.kwargs.get('folder_level2_id', ''))
+        serializer = FolderSerializer(folder)
+        return Response(serializer.data)
+
+    def delete(self, request, *args, **kwargs):
+        folder = self.get_object(self.kwargs.get('folder_level2_id', ''))
+        folder.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 '''          File  Zone             '''
 #VIew to upload  the documents
 class AddFileView(APIView):

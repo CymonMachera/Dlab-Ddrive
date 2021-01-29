@@ -33,7 +33,8 @@ class UserLoginView(APIView):
                     'email': serializer.data['email'],
                     'role': serializer.data['role'],
                     'pillar':serializer.data['pillars'],
-                    'name' : serializer.data['name']
+                    'name' : serializer.data['name'],
+                    'id': serializer.data['id']
                     
                 }
             }

@@ -1,11 +1,18 @@
 from django.db import models
+from safedelete.models import SafeDeleteModel
+from safedelete.models import SOFT_DELETE_CASCADE
+from documentation.manager import *
+from datetime import datetime
 from django.urls import reverse
 from django.utils.text import slugify
 from account.models import CustomUser
 from program.models import Activity
 # Create your models here.
 #a model to create the folder
-class Folder(models.Model):
+class Folder(SafeDeleteModel):
+    _safedelete_policy = SOFT_DELETE_CASCADE
+    objects = MyModelManager()
+
     creator = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE, blank = True, null=True)
     name = models.CharField(max_length=64)
@@ -40,7 +47,10 @@ class Folder(models.Model):
         unique_together = [['parent', 'name']]
         ordering = ('name',)
 
-class Uploads(models.Model):
+class Uploads(SafeDeleteModel):
+    _safedelete_policy = SOFT_DELETE_CASCADE
+    objects = MyModelManager()
+
     Images = 3
     Video = 2
     Documents = 1
@@ -62,8 +72,9 @@ class Uploads(models.Model):
     
     upload_path = models.FileField(upload_to=url, default = "pillar/", verbose_name = "Choose File", blank = False)
 
+
     def __str__(self):
-        return str(self.doc_name)
+        return self.doc_name
 
     class Meta:
         verbose_name_plural = "Documentations"

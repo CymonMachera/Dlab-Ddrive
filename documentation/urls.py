@@ -11,11 +11,6 @@ urlpatterns = [
 
     path('addfolder/', AddFolderView.as_view(), name='add_folder'),
     path('folder/<int:folder_id>/', FolderUpdateView.as_view(), name='folder_update'),
-
-    #trash level 1
-    path('trash/', ActivityFolderFileTrashView.as_view(), name='Trash files'),
-    path('trash/folder/<int:folder_id>/', TrashFoldersUpdateView.as_view(), name='Trash_folder_update'),
-    path('trash/file/<int:file_id>/', TrashFilesUpdateView.as_view(), name='Trash_file_update'),
     
     #folder level 2
     path('folder/<int:folder_id>/files/', FolderFileView.as_view(), name='level2 files'),

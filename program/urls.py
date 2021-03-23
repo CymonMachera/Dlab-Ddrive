@@ -42,8 +42,7 @@ urlpatterns = [
 
     #include url from documentations  
     path('<int:pk>/programs/<int:pk_alt>/activities/<int:activity_id>/files/', include('documentation.urls')),
-    
-    
+        
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns, suffix_required=False, allowed=['json', 'html'])

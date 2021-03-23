@@ -39,5 +39,8 @@ urlpatterns = [
     path('dlab/staff/<int:staff_id>/profile/', StaffProfileView.as_view(), name='profile'),
     path('dlab/staff/<int:staff_id>/profile/addprofile/', ProfileView.as_view(), name='add_profile'),
     path('dlab/staff/<int:staff_id>/profile/<int:profile_id>/', ProfileUpdateView.as_view(), name='profile_update'),
+
+    #include url from trash  
+    path('user/', include('trash.urls')),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

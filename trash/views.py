@@ -36,7 +36,7 @@ class UserUpdateView(APIView):
         user = self.get_object(pk)
         serializer = UserSerializer(user)
         return Response(serializer.data)
-        
+
 '''                Trash Zone                  '''
 class UserFolderFileTrashView(APIView):
     serializer_class = UserSerializer
@@ -44,20 +44,20 @@ class UserFolderFileTrashView(APIView):
 
     def get_object(self, pk):
         try:
-            return Folder.objects.deleted_only()
+            return Folder.objects.deleted_only().filter( creator_id = pk)
         except Folder.DoesNotExist:
             raise Http404
     def get_objects(self, pk):
         try:
-            return Uploads.objects.deleted_only().filter( folder__id__isnull = False)
+            return Uploads.objects.deleted_only().filter( folder__id__isnull = False , uploader_name_id = pk)
         except Uploads.DoesNotExist:
             raise Http404
 
    
     def get(self, request,*args, **kwargs):
         serializer = {}
-        folder = self.get_object(self.kwargs.get('pillar_id', ''))
-        filee = self.get_objects(self.kwargs.get('pillar_id', ''))
+        folder = self.get_object(self.kwargs.get('pk', ''))
+        filee = self.get_objects(self.kwargs.get('pk', ''))
         serializer['folders'] = FolderSerializer(folder, many=True).data
         serializer['files'] = FileSerializer(filee, many=True).data
         return Response(serializer)

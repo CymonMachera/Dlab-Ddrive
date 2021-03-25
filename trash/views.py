@@ -42,14 +42,19 @@ class UserFolderFileTrashView(APIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
 
-    def get_object(self, pk):
+    def get_object(self, pk):    #get deleted folder
         try:
             return Folder.objects.deleted_only().filter( creator_id = pk)
         except Folder.DoesNotExist:
             raise Http404
-    def get_objects(self, pk):
+    def get_objects(self, pk):   #get deleted files belonging to a folder
         try:
             return Uploads.objects.deleted_only().filter( folder__id__isnull = False , uploader_name_id = pk)
+        except Uploads.DoesNotExist:
+            raise Http404
+    def get_objectss(self, pk):  # get deletd files in the base activity
+        try:
+            return Uploads.objects.deleted_only().filter( activity_name__id__isnull = False , uploader_name_id = pk)
         except Uploads.DoesNotExist:
             raise Http404
 
@@ -58,8 +63,10 @@ class UserFolderFileTrashView(APIView):
         serializer = {}
         folder = self.get_object(self.kwargs.get('pk', ''))
         filee = self.get_objects(self.kwargs.get('pk', ''))
+        filee2 = self.get_objectss(self.kwargs.get('pk', ''))
         serializer['folders'] = FolderSerializer(folder, many=True).data
-        serializer['files'] = FileSerializer(filee, many=True).data
+        serializer['files_level1'] = FileSerializer(filee2, many=True).data
+        serializer['files_level2'] = FileSerializer(filee, many=True).data
         return Response(serializer)
 
 '''              Undelete / Delete File and folders from Trash        '''

@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
+from safedelete.models import HARD_DELETE
 from django.http import Http404
 from trash.serializer import UserSerializer
 from account.models import CustomUser
@@ -15,7 +15,7 @@ from rest_framework.response import Response
  # this view takes in the   
 class UserView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         user = CustomUser.objects.all()
         serializer = UserSerializer(user, many=True)
@@ -24,7 +24,7 @@ class UserView(APIView):
 #Retrieve a user instance. 
 class UserUpdateView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return CustomUser.objects.get(pk=pk)
@@ -40,7 +40,7 @@ class UserUpdateView(APIView):
 '''                Trash Zone                  '''
 class UserFolderFileTrashView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):    #get deleted folder
         try:
@@ -52,7 +52,7 @@ class UserFolderFileTrashView(APIView):
             return Uploads.objects.deleted_only().filter( folder__id__isnull = False , uploader_name_id = pk)
         except Uploads.DoesNotExist:
             raise Http404
-    def get_objectss(self, pk):  # get deletd files in the base activity
+    def get_objectss(self, pk):  # get deleted files in the base activity
         try:
             return Uploads.objects.deleted_only().filter( activity_name__id__isnull = False , uploader_name_id = pk)
         except Uploads.DoesNotExist:
@@ -75,7 +75,7 @@ class UserFolderFileTrashView(APIView):
 class TrashFilesUpdateView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = FileSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Uploads.objects.get(pk=pk)
@@ -100,13 +100,13 @@ class TrashFilesUpdateView(APIView):
 
     def delete(self, request, *args, **kwargs):
         filee = self.get_object(self.kwargs.get('file_id', ''))
-        filee.delete()
+        filee.delete(force_policy= HARD_DELETE, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 #Trash Folders update view
 class TrashFoldersUpdateView(APIView):
     serializer_class = FolderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Folder.objects.get(pk=pk)
@@ -126,7 +126,7 @@ class TrashFoldersUpdateView(APIView):
 
     def delete(self, request, *args, **kwargs):
         folder = self.get_object(self.kwargs.get('folder_id', ''))
-        folder.delete()
+        folder.delete(force_policy= HARD_DELETE, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)
     
     def get(self, request, *args, **kwargs):

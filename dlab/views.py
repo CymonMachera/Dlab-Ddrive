@@ -1,6 +1,5 @@
 from rest_framework.views import APIView
-from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from dlab.serializers import *
 from rest_framework.response import Response
@@ -10,7 +9,7 @@ from django.http import Http404
 '''                       Organizaion  Zone                '''
 #view to create and update organization
 class OrganizationView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         organizations = Organization.objects.all().order_by("name")
         serializer = OrganizationSerializer(organizations, many=True)
@@ -18,7 +17,7 @@ class OrganizationView(APIView):
 #view to create organization
 class AddOrganizationView(APIView):
     serializer_class = OrganizationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -30,7 +29,7 @@ class AddOrganizationView(APIView):
 #Retrieve, update or delete a organization instance. 
 class OrganizationUpdateView(APIView):
     serializer_class = OrganizationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Organization.objects.get(pk=pk)
@@ -57,7 +56,7 @@ class OrganizationUpdateView(APIView):
 '''                       Staff Zone                '''
 # List all staffs or create a new one
 class StaffView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         staffs = Staff.objects.all()
         serializer = StaffSerializer(staffs, many=True)
@@ -65,7 +64,7 @@ class StaffView(APIView):
 
 class AddStaffView(APIView):
     serializer_class = StaffSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -79,7 +78,7 @@ class AddStaffView(APIView):
 #Retrieve, update or delete a staff instance. 
 class StaffUpdateView(APIView):
     serializer_class = StaffSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Staff.objects.get(pk=pk)
@@ -104,7 +103,7 @@ class StaffUpdateView(APIView):
 #VIew to create and retrieve profiles
 class ProfileView(APIView):
     serializer_class = ProfileSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -118,7 +117,7 @@ class ProfileView(APIView):
 #Retrieve, update or delete a profile instance. 
 class ProfileUpdateView(APIView):
     serializer_class = ProfileSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Profile.objects.get(pk=pk)
@@ -143,7 +142,7 @@ class ProfileUpdateView(APIView):
 '''            StaffProfile Zone           '''
 class StaffProfileView(APIView):
     serializer_class = StaffSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

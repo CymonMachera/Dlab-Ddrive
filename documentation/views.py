@@ -1,7 +1,6 @@
-from django.db.models.fields import NullBooleanField
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.http import Http404
 from documentation.serializers import *
@@ -13,7 +12,7 @@ from documentation.models import *
 #view to create folders
 class AddFolderView(APIView):
     serializer_class = FolderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -26,7 +25,7 @@ class AddFolderView(APIView):
 #Retrieve, update or delete a folder instance. 
 class FolderUpdateView(APIView):
     serializer_class = FolderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Folder.objects.get(pk=pk)
@@ -56,7 +55,7 @@ class FolderUpdateView(APIView):
 #Retrieve, update or delete a folder instance. 
 class FolderLevel2UpdateView(APIView):
     serializer_class = FolderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Folder.objects.get(pk=pk)
@@ -88,7 +87,7 @@ class FolderLevel2UpdateView(APIView):
 class AddFileView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = FileSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -103,7 +102,7 @@ class AddFileView(APIView):
 class FileUpdateView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = FileSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Uploads.objects.get(pk=pk)
@@ -133,7 +132,7 @@ class FileUpdateView(APIView):
 '''            ActivityFolderFile Zone           '''
 class ActivityFolderFileView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -159,7 +158,7 @@ class ActivityFolderFileView(APIView):
 '''            FolderFile Zone           '''
 class FolderFileView(APIView):
     serializer_class = FolderSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

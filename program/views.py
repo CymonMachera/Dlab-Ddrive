@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .serializers import *
 from django.http import Http404
@@ -10,7 +10,7 @@ from program.models import Program, Activity
  # this view takes in the   
 class PillarView(APIView):
     serializer_class = PillarSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         pillar = Pillar.objects.all()
         serializer = PillarSerializer(pillar, many=True)
@@ -18,7 +18,7 @@ class PillarView(APIView):
 #Retrieve, update or delete a pillar instance. 
 class PillarUpdateView(APIView):
     serializer_class = PillarSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Pillar.objects.get(pk=pk)
@@ -34,7 +34,7 @@ class PillarUpdateView(APIView):
 '''        PillarProgram zone        '''
 class PillarProgramView(APIView):
     serializer_class = PillarSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -52,7 +52,7 @@ class PillarProgramView(APIView):
 '''            Program/project Zone          '''
 class ProgramView(APIView):
     serializer_class = ProgramSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -64,7 +64,7 @@ class ProgramView(APIView):
 #Retrieve, update or delete a program instance. 
 class ProgramUpdateView(APIView):
     serializer_class = ProgramSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Program.objects.get(pk=pk)
@@ -95,7 +95,7 @@ class ProgramUpdateView(APIView):
 '''            ProgramActivity Zone           '''
 class ProgramActivityView(APIView):
     serializer_class = ProgramSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -114,7 +114,7 @@ class ProgramActivityView(APIView):
 '''            Activity Zone          '''
 class ActivityView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -126,7 +126,7 @@ class ActivityView(APIView):
 #Retrieve, update or delete a activity instance. 
 class ActivityUpdateView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Activity.objects.get(pk=pk)
@@ -157,7 +157,7 @@ class ActivityUpdateView(APIView):
 '''            New venue register          '''
 class AddVenueView(APIView):
     serializer_class = VenueSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -166,7 +166,7 @@ class AddVenueView(APIView):
             serializer.save()
             return Response(serializer.data, status=status_code)
 class VenueView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get(self, request, format=None):
         venue = Venue_detail.objects.all()
         serializer = VenueSerializer(venue, many=True)
@@ -174,7 +174,7 @@ class VenueView(APIView):
 #Retrieve, update or delete a venue instance. 
 class VenueUpdateView(APIView):
     serializer_class = VenueSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Venue_detail.objects.get(pk=pk)
@@ -211,7 +211,7 @@ class VenueUsageView(APIView):
 
 class AddVenueUsageView(APIView):
     serializer_class = VenueUsageSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -222,7 +222,7 @@ class AddVenueUsageView(APIView):
 #Retrieve, update or delete a venue usage instance. 
 class VenueUsageUpdateView(APIView):
     serializer_class = VenueUsageSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Venue.objects.get(pk=pk)
@@ -252,7 +252,7 @@ class VenueUsageUpdateView(APIView):
 '''          Loction Registration Zone             '''
 class LocationView(APIView):
     serializer_class = LocationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -270,7 +270,7 @@ class LocationView(APIView):
 #Retrieve, update or delete a location instance. 
 class LocationUpdateView(APIView):
     serializer_class = LocationSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Location.objects.get(pk=pk)
@@ -301,7 +301,7 @@ class LocationUpdateView(APIView):
 '''          Coordinator  Zone             '''
 class CoordinatorView(APIView):
     serializer_class = CoordinatorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -314,7 +314,7 @@ class CoordinatorView(APIView):
 #Retrieve, update or delete a coordinator instance. 
 class CoordinatorUpdateView(APIView):
     serializer_class = CoordinatorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Coordinator.objects.get(pk=pk)
@@ -345,7 +345,7 @@ class CoordinatorUpdateView(APIView):
 '''          Collaborator  Zone             '''
 class CollaboratorsView(APIView):
     serializer_class = CollaboratorsSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -359,7 +359,7 @@ class CollaboratorsView(APIView):
 #Retrieve, update or delete a coordinator instance. 
 class CollaboratorsUpdateView(APIView):
     serializer_class = CollaboratorsSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Collaborators.objects.get(pk=pk)
@@ -389,7 +389,7 @@ class CollaboratorsUpdateView(APIView):
 '''          Facilitator  Zone             '''
 class FacilitatorView(APIView):
     serializer_class = FacilitatorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -403,7 +403,7 @@ class FacilitatorView(APIView):
 #Retrieve, update or delete a coordinator instance. 
 class FacilitatorUpdateView(APIView):
     serializer_class = FacilitatorSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
     def get_object(self, pk):
         try:
             return Facilitator.objects.get(pk=pk)
@@ -435,7 +435,7 @@ class FacilitatorUpdateView(APIView):
 '''            ActivityCoordiantor Zone           '''
 class ActivityCoordinatorView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -452,7 +452,7 @@ class ActivityCoordinatorView(APIView):
 '''            ActivityCollaborator Zone           '''
 class ActivityCollaboratorsView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -469,7 +469,7 @@ class ActivityCollaboratorsView(APIView):
 '''            ActivityFacillitator Zone           '''
 class ActivityFacilitatorView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
@@ -486,7 +486,7 @@ class ActivityFacilitatorView(APIView):
 '''            ActivityVenueUSage Zone           '''
 class ActivityVenueUsageView(APIView):
     serializer_class = ActivitySerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:

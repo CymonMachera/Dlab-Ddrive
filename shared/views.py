@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated,  AllowAny
 from rest_framework import status
 from safedelete.models import HARD_DELETE
 from django.http import Http404
@@ -15,7 +15,7 @@ from shared.models import *
 class AddSharedFileView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = SharedFileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -30,7 +30,7 @@ class AddSharedFileView(APIView):
 class SharedFileUpdateView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = SharedFileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
     def get_object(self, pk):
         try:
             return SharedFile.objects.all().filter( shared_by_id = pk)
@@ -61,7 +61,7 @@ class SharedFileUpdateView(APIView):
 #VIew to upload share a document
 class AddSharedFolderView(APIView):
     serializer_class = SharedFileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)
@@ -105,7 +105,7 @@ class SharedFolderUpdateView(APIView):
 '''                Shared Zone  (the shared button)                '''
 class UserSharedFolderFileView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
 
     def get_object(self, pk):    #get shared folder
         try:

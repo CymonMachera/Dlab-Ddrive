@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from safedelete.models import HARD_DELETE
 from django.http import Http404
@@ -13,7 +13,7 @@ from rest_framework.response import Response
  # this view takes in the   
 class UserView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
     def get(self, request, format=None):
         user = CustomUser.objects.all()
         serializer = UserSerializer(user, many=True)
@@ -22,7 +22,7 @@ class UserView(APIView):
 #Retrieve a user instance. 
 class UserUpdateView(APIView):
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [ AllowAny]
     def get_object(self, pk):
         try:
             return CustomUser.objects.get(pk=pk)

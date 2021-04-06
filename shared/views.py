@@ -33,7 +33,7 @@ class SharedFileUpdateView(APIView):
     permission_classes = [ AllowAny]
     def get_object(self, pk):
         try:
-            return SharedFile.objects.all().filter( shared_by_id = pk)
+            return SharedFile.objects.get( shared_by_id = pk)
         except SharedFile.DoesNotExist:
             raise Http404
 
@@ -60,7 +60,7 @@ class SharedFileUpdateView(APIView):
 '''          Shared Folder  Zone             '''
 #VIew to upload share a document
 class AddSharedFolderView(APIView):
-    serializer_class = SharedFileSerializer
+    serializer_class = SharedFolderSerializer
     permission_classes = [ AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
@@ -75,10 +75,10 @@ class AddSharedFolderView(APIView):
 #Retrieve, update or delete a shared file instance. 
 class SharedFolderUpdateView(APIView):
     serializer_class = SharedFolderSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def get_object(self, pk):
         try:
-            return SharedFolder.objects.all().filter( shared_by_id = pk)
+            return SharedFolder.objects.get( shared_by_id = pk)
         except SharedFolder.DoesNotExist:
             raise Http404
 

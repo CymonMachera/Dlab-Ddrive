@@ -4,30 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
 from .managers import CustomUserManager
 
-
-
-#A model that creates the roles of the users
-# class Role(models.Model):
-#     '''
-#     The Role entries are managed by the system,
-#     automatically created via a Django data migration.
-#     '''
-
-#     PILLAR_HEAD = 1
-#     NORMAL_USER = 2
-#     MANAGEMENT_USER = 3
-#     ROLE_CHOICES = (
-#         (PILLAR_HEAD, 'pillar_head'),
-#         (NORMAL_USER, 'normal-user'),
-#         (MANAGEMENT_USER, 'management_user'),
-        
-#     )
-
-#     id = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, primary_key=True)
-
-#     def __str__(self):
-#         return self.get_id_display()
-
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     PILLAR_HEAD = 3
     NORMAL_USER = 4

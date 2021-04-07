@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'safedelete',
     'documentation',
     'shared',
+    'trash',
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    # 'django_unused_media',
 ]
 
 MIDDLEWARE = [

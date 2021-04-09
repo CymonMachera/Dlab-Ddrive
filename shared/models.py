@@ -11,7 +11,7 @@ class SharedFolder(models.Model):
 
 
     def __str__(self):
-        return self.folder_id
+        return self.folder_link
 
 class SharedFile(models.Model):
     shared_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
@@ -20,4 +20,4 @@ class SharedFile(models.Model):
     file_link  = models.CharField(max_length = 50, blank = False, null = False, default = None)
 
     def __str__(self):
-        return self.file_id
+        return self.file_link

@@ -70,10 +70,8 @@ class Uploads(SafeDeleteModel):
     folder = models.ForeignKey(Folder, on_delete=models.CASCADE, blank = True, null=True)
     dete_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    #prepare the url
-    url = str(folder.name)
     
-    upload_path = models.FileField(upload_to=url, default = "pillar/", verbose_name = "Choose File", blank = False)
+    upload_path = models.FileField(upload_to="uploads/%Y/%m/%d/", default = "pillar/", verbose_name = "Choose File", blank = False)
 
 
     def __str__(self):
@@ -85,7 +83,7 @@ class Uploads(SafeDeleteModel):
 
 # These two auto-delete files from filesystem when they are unneeded:
 
-@receiver(safedelete.signals.pre_softdelete, sender=Uploads)
+@receiver(models.signals.post_delete, sender=Uploads)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
     """
     Deletes file from filesystem
@@ -114,3 +112,4 @@ def auto_delete_file_on_change(sender, instance, **kwargs):
     if not old_file == new_file:
         if os.path.isfile(old_file.path):
             os.remove(old_file.path)
+

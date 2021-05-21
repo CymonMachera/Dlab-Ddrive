@@ -87,6 +87,10 @@ class TrashFoldersUpdateView(APIView):
             return Folder.objects.get(pk=pk)
         except Folder.DoesNotExist:
             raise Http404
+    def get(self, request, *args, **kwargs):
+        folder = self.get_object(self.kwargs.get('folder_id', ''))
+        serializer = FolderSerializer(folder)
+        return Response(serializer.data)
 
     def put(self, request, *args, **kwargs):
         folder = self.get_object(self.kwargs.get('folder_id', ''))
@@ -104,7 +108,4 @@ class TrashFoldersUpdateView(APIView):
         folder.delete(force_policy= HARD_DELETE, **kwargs)
         return Response(status=status.HTTP_204_NO_CONTENT)
     
-    def get(self, request, *args, **kwargs):
-        folder = self.get_object(self.kwargs.get('folder_id', ''))
-        serializer = FolderSerializer(folder)
-        return Response(serializer.data)
+    

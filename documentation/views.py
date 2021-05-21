@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.parsers import FileUploadParser
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from django.http import Http404
 from documentation.serializers import *
@@ -87,7 +87,7 @@ class FolderLevel2UpdateView(APIView):
 class AddFileView(APIView):
     parser_class = (FileUploadParser,)
     serializer_class = FileSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def post(self, request, *args, **kwargs):
         serializer = self.serializer_class(data=request.data)
         valid = serializer.is_valid(raise_exception=True)

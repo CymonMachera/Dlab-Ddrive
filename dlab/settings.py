@@ -21,12 +21,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9hg%fm3w-j=zs#twngfw6u#7f7#xcu#9mzu(t#6lwjmp((6$%o'
+# SECRET_KEY = '9hg%fm3w-j=zs#twngfw6u#7f7#xcu#9mzu(t#6lwjmp((6$%o'       I have disabled this line
 
+with open('./secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,14 +66,17 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+
 CORS_ALLOW_CREDENTIALS = True
-# CORS_ORIGIN_WHITELIST = [
-#     'http://localhost:3030',
-# ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
-# CORS_ORIGIN_REGEX_WHITELIST = [
-#     'http://localhost:3030',
-# ]
+CORS_ORIGIN_WHITELIST = [
+    'http://127.0.0.1:8000',
+    'http://localhost:4200',
+] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
+
+CORS_ORIGIN_REGEX_WHITELIST = [
+    'http://127.0.0.1:8000',
+    'http://localhost:4200',
+]
 
 ROOT_URLCONF = 'dlab.urls'
 
@@ -96,16 +102,11 @@ WSGI_APPLICATION = 'dlab.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dlab',
-        'USER': 'root',
-        'HOST': 'localhost',
-        'PORT': '3306',
-    }
-}
+import dj_database_url 
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
 
+# 
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -155,6 +156,8 @@ AUTH_USER_MODEL = 'account.CustomUser'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 
+#  Add configuration for static files storage using whitenoise
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # REST framework settings
 REST_FRAMEWORK = {

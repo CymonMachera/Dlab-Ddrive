@@ -70,13 +70,13 @@ CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://localhost:4200',
-    '167.99.14.161:8000,'
+    'http://167.99.14.161:8000,'
 ] # If this is used, then not need to use `CORS_ORIGIN_ALLOW_ALL = True`
 
 CORS_ORIGIN_REGEX_WHITELIST = [
     'http://127.0.0.1:8000',
     'http://localhost:4200',
-    '167.99.14.161:8000'
+    'http://167.99.14.161:8000'
 ]
 
 ROOT_URLCONF = 'dlab.urls'

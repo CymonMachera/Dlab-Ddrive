@@ -50,8 +50,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-    'herokuapp',
-    # 'django_unused_media',
 ]
 
 MIDDLEWARE = [

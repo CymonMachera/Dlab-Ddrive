@@ -26,6 +26,7 @@ urlpatterns = [
     path('login/', include('account.urls')),
     
     path('pillar/', include('program.urls')),
+    path('advertisement/', include('advertisement.urls')),
 
     #from Dlab
     path('dlab/staff/', StaffView.as_view(), name='staff'),

@@ -11,7 +11,7 @@ from django.utils.text import slugify
 from django.db.models.signals import post_delete, pre_save
 from django.dispatch import receiver
 from account.models import CustomUser
-from program.models import Activity
+from program.models import Activity, Program
 # Create your models here.
 #a model to create the folder
 class Folder(SafeDeleteModel):
@@ -19,7 +19,7 @@ class Folder(SafeDeleteModel):
     objects = MyModelManager()
 
     creator = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null = True)
-    activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE, blank = True, null=True)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, blank = True, null=True)
     name = models.CharField(max_length=64)
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -63,7 +63,7 @@ class Uploads(SafeDeleteModel):
         (Documents, 'Documents')
         
     )
-    activity_name = models.ForeignKey(Activity, on_delete=models.CASCADE, blank = True, null=True)
+    program = models.ForeignKey(Program, on_delete=models.CASCADE, blank = True, null=True)
     doc_type = models.PositiveSmallIntegerField(choices=CHOICES, blank=True, null=False)
     doc_name = models.CharField(max_length=50)
     uploader_name = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

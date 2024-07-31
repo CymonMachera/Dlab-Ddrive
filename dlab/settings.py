@@ -82,6 +82,7 @@ CORS_ORIGIN_REGEX_WHITELIST = [
 ]
 
 ROOT_URLCONF = 'dlab.urls'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 TEMPLATES = [
     {

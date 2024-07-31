@@ -5,7 +5,7 @@ from .views import *
 urlpatterns = [
 
     #folder level 1
-    path('', ActivityFolderFileView.as_view(), name='level 1 files'),
+    path('', ProgramFolderFileView.as_view(), name='level 1 files'),
     path('addfile/', AddFileView.as_view(), name='add_file'),
     path('<int:file_id>/', FileUpdateView.as_view(), name='file_update'),
 

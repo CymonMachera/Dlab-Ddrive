@@ -130,26 +130,26 @@ class FileUpdateView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 '''            ActivityFolderFile Zone           '''
-class ActivityFolderFileView(APIView):
+class ProgramFolderFileView(APIView):
     serializer_class = ActivitySerializer
     permission_classes = [IsAuthenticated]
 
     def get_object(self, pk):
         try:
-            return Folder.objects.filter( activity_name_id= pk)
+            return Folder.objects.filter( program_id= pk)
         except Folder.DoesNotExist:
             raise Http404
     def get_objects(self, pk):
         try:
-            return Uploads.objects.filter( activity_name_id= pk)
+            return Uploads.objects.filter( program_id= pk)
         except Uploads.DoesNotExist:
             raise Http404
 
    
     def get(self, request,*args, **kwargs):
         serializer = {}
-        folder = self.get_object(self.kwargs.get('activity_id', ''))
-        filee = self.get_objects(self.kwargs.get('activity_id', ''))
+        folder = self.get_object(self.kwargs.get('pk_alt>', ''))
+        filee = self.get_objects(self.kwargs.get('pk_alt>', ''))
         serializer['folders'] = FolderSerializer(folder, many=True).data
         serializer['files'] = FileSerializer(filee, many=True).data
         return Response(serializer)

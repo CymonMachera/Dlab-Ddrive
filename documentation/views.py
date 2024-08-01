@@ -148,8 +148,8 @@ class ProgramFolderFileView(APIView):
    
     def get(self, request,*args, **kwargs):
         serializer = {}
-        folder = self.get_object(self.kwargs.get('pk_alt>', ''))
-        filee = self.get_objects(self.kwargs.get('pk_alt>', ''))
+        folder = self.get_object(self.kwargs.get('pk_alt', ''))
+        filee = self.get_objects(self.kwargs.get('pk_alt', ''))
         serializer['folders'] = FolderSerializer(folder, many=True).data
         serializer['files'] = FileSerializer(filee, many=True).data
         return Response(serializer)

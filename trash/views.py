@@ -29,7 +29,7 @@ class UserFolderFileTrashView(APIView):
             raise Http404
     def get_objectss(self, pk):  # get deleted files in the base activity
         try:
-            return Uploads.objects.deleted_only().filter( activity_name__id__isnull = False , uploader_name_id = pk)
+            return Uploads.objects.deleted_only().filter( program__id__isnull = False , uploader_name_id = pk)
         except Uploads.DoesNotExist:
             raise Http404
 

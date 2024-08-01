@@ -43,5 +43,6 @@ urlpatterns = [
 
     #include url from users
     path('user/', include('users.urls')),
+    path('advertisement/', include('advertisement.urls')),
     
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -5,12 +5,12 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    PILLAR_HEAD = 3
+    DEPERTMENT_HEAD = 3
     NORMAL_USER = 4
     MANAGEMENT_USER = 2
     ADMIN = 1
     ROLE_CHOICES = (
-        (PILLAR_HEAD, 'Pillar Head'),
+        (DEPERTMENT_HEAD, 'Unit/ Depertment Head'),
         (NORMAL_USER, 'Normal User'),
         (MANAGEMENT_USER, 'Management user'),
         (ADMIN, 'Admin')
@@ -21,6 +21,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length = 40, verbose_name = 'Email Address', unique = True)
     first_name =  models.CharField(max_length=30, blank=True, verbose_name = 'First Name')
     last_name =  models.CharField(max_length=30, blank=True, verbose_name = 'Last Name')
+    designation =  models.CharField(max_length=100, blank=True, verbose_name = 'Designation', default='')
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

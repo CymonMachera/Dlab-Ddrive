@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 
 from .serializers import UserLoginSerializer
 
-from .models import CustomUser
+from .models import CustomUser, Pillar
 
 
 # Create your views here.
@@ -22,7 +22,12 @@ class UserLoginView(APIView):
 
         if valid:
             status_code = status.HTTP_200_OK
+            
+            # fetch pillar names
+            pillar_names = Pillar.objects.filter(user_pillar=serializer.data['id']).values_list('name', flat=True)
+            pillar_names_list = list(pillar_names)
 
+            
             response = {
                 'success': True,
                 'statusCode': status_code,
@@ -34,7 +39,8 @@ class UserLoginView(APIView):
                     'role': serializer.data['role'],
                     'pillar':serializer.data['pillars'],
                     'name' : serializer.data['name'],
-                    'id': serializer.data['id']
+                    'id': serializer.data['id'],
+                    'pillars': pillar_names_list
                     
                 }
             }

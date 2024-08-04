@@ -1,7 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 
 class CustomUserManager(BaseUserManager):
-        def create_user(self, email, first_name, last_name, password):
+        def create_user(self, email, first_name, last_name,designation, password):
             if not email:
                 raise ValueError('user Must have an email')
             if not first_name:
@@ -12,7 +12,8 @@ class CustomUserManager(BaseUserManager):
             user = self.model(
                 email = self.normalize_email(email=email),
                 first_name = first_name,
-                last_name = last_name
+                last_name = last_name,
+                designation = designation
             )
             user.set_password(raw_password=password)  
             user.save(using=self._db)     

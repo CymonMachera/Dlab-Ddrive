@@ -11,7 +11,7 @@ class Program(models.Model):
     def __str__(self):
         return self.name
     class Meta:
-        verbose_name_plural = "Programs & Projects"
+        verbose_name_plural = "Sections"
         ordering = ("-date_modified",)
 
 class Location(models.Model):

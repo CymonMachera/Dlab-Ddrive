@@ -32,9 +32,9 @@ class ActivityAdmin(admin.ModelAdmin):
     ]
 
 admin.site.register(Program)
-admin.site.register(Activity, ActivityAdmin)
-admin.site.register(Venue)
-admin.site.register(Venue_detail)
+# admin.site.register(Activity, ActivityAdmin)
+# admin.site.register(Venue)
+# admin.site.register(Venue_detail)
 
 #this method allows you to add a plus button without displaying the Model On Admin Panel
 class MyModelAdmin(admin.ModelAdmin):

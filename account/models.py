@@ -63,5 +63,5 @@ class Pillar(models.Model):
         return self.name
     
     class Meta:
-        verbose_name_plural = "Pillars"
+        verbose_name_plural = "Depertments & Units"
     

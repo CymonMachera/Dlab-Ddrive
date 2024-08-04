@@ -15,7 +15,7 @@ class StaffAdmin(admin.ModelAdmin):
     ]
     filter_horizontal = ('organization', )
 
-admin.site.register(Organization)
-admin.site.register(Staff, StaffAdmin)
+# admin.site.register(Organization)
+# admin.site.register(Staff, StaffAdmin)
 
 

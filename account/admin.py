@@ -47,7 +47,7 @@ class UserChangeForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'password', 'first_name', 'last_name', 'is_active', 'is_admin','is_superuser','is_staff')
+        fields = ('email', 'password', 'first_name', 'last_name','designation', 'is_active', 'is_admin','is_superuser','is_staff')
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -70,7 +70,7 @@ class UserAdmin(BaseUserAdmin):
     list_filter = ('is_admin',)
     """The fieldset displays on the user update page"""
     fieldsets = (
-        (None, {'fields': ('email','first_name','last_name', 'password')}),
+        (None, {'fields': ('email','first_name','last_name','designation', 'password')}),
         ('Permissions', {'fields': ('is_admin', 'is_active','is_superuser','is_staff')}),
         ('Role', {'fields': ('roles',)}),
         ('Important dates', {'fields': ('last_login',)}),
@@ -81,7 +81,7 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'first_name', 'last_name','roles', 'is_superuser', 'is_active', 'password1', 'password2'),
+            'fields': ('email', 'first_name', 'last_name','designation','roles', 'is_superuser', 'is_active', 'password1', 'password2'),
         }),
     )
     search_fields = ('email',)

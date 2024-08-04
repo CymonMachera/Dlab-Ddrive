@@ -39,6 +39,7 @@ class UserLoginView(APIView):
                     'role': serializer.data['role'],
                     'pillar':serializer.data['pillars'],
                     'name' : serializer.data['name'],
+                    'designation' : serializer.data['designation'],
                     'id': serializer.data['id'],
                     'pillars': pillar_names_list
                     
